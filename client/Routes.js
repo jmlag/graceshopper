@@ -4,7 +4,7 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {Main, Login, Signup, UserHome, ProductsList, Product, Cart} from './components'; 
+import {Main, Login, Signup, UserHome, ProductsList, Product, Cart, ReviewsList} from './components'; 
 import {me} from './store';
 
 /**
@@ -29,7 +29,24 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} /> 
             <Route exact path="/packages" component={ProductsList} /> 
-            <Route exact path="/packages/:productId" render={ (props) => (<Product 
+            <Route exact path="packages/:productId/reviews" render={ props => (
+              <ReviewsList
+                reviews={[{
+                  score: 2.3,
+                  writtenReview: "review for product",
+                  date: "December 27, 2017",
+                  productId: 1,
+                },
+                {
+                  score: 3.9,
+                  writtenReview: "review for product",
+                  date: "December 28, 2017",
+                  productId: 2,
+                }
+                ]} 
+              />
+            ) } />
+            <Route path="/packages/:productId" render={ props => (<Product 
                 product={{
                   name: "prod" + props.match.params.productId,
                   image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
@@ -39,7 +56,6 @@ class Routes extends Component {
                 productId={props.match.params.productId}
               />)} 
             /> 
-
             {
               isLoggedIn ?
                 <Switch>
