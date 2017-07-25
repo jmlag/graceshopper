@@ -8,10 +8,11 @@ function ProductsList (props) {
 
   return (
     <div>   
-      {/* searchbar and dropdown filter component    */}
+       searchbar and dropdown filter component 
+          
       <ul>
         { 
-          messages
+          products
           .filter( message => {
             //filter parameters
           })
@@ -20,10 +21,11 @@ function ProductsList (props) {
               <NavLink to={/* api route */}> 
                 {/* product thumbnail component - basically <Product /> without discription and smaller image */}
               </ NavLink>
-            <li>
-          )) 
+            </li>
+          ))
         }
       </ul>
+
     </div>
   );
 }
