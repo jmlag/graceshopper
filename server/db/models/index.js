@@ -46,5 +46,5 @@ module.exports = {
   Package,
   Subscription,
   User,
-  Review
+  Review,
 }
