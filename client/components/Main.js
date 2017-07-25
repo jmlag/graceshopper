@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
-import LandingPage from './landingPage.jsx'
-
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -18,7 +16,6 @@ const Main = (props) => {
 
   return (
     <div>
-      <LandingPage />
       <h1>BOILERMAKER</h1>
       <nav>
         {
