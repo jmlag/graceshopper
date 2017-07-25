@@ -1,47 +1,71 @@
+//INCOMPLETE - NEEDS MODIFICATION
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
 
 function ProductsList (props) {
 
   const { products } = props;
 
   return (
-    <div>   
-       searchbar and dropdown filter component 
-          
-      <ul>
+    <div>
+      <ul className="media-list">
         { 
-          products
-          .filter( message => {
-            //filter parameters
-          })
-          .map(message => (
-            <li key={message.id} >
-              <NavLink to={/* api route */}> 
-                {/* product thumbnail component - basically <Product /> without discription and smaller image */}
-              </ NavLink>
-            </li>
-          ))
+        messages
+        .filter( message => {
+          //filter parameters
+        })
+        .map(message => {
+          <div key={message.id} >
+            {/* Product name, image, price. Make into seperate component? */}
+          <div>
+        }) 
         }
       </ul>
-
+      <NewMessageEntry channelId={channelId} />
     </div>
   );
 }
 
+class MessagesListLoader extends Component {
+
+  componentDidMount () {
+    this.props.changeCurrentChannel(this.props.channel.name);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.channel.name !== this.props.channel.name) {
+      this.props.changeCurrentChannel(nextProps.channel.name);
+    }
+  }
+
+  render () {
+    return (
+      <MessagesList {...this.props} />
+    );
+  }
+}
+
 const mapStateToProps = function (state, ownProps) {
 
+  const channelId = Number(ownProps.match.params.channelId);
+
   return {
-    products: state.products
+    channel: state.channels.find(channel => channel.id === channelId) || { name: '' },
+    messages: state.messages.filter(message => message.channelId === channelId),
+    channelId
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
-  return {};
+  return {
+    changeCurrentChannel(channelName) {
+      dispatch(changeCurrentChannel(channelName));
+    }
+  };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductsList);
+)(MessagesListLoader);

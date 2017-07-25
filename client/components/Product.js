@@ -6,16 +6,13 @@ export default function Product(props) {
 
     return (
         <div>       
-            <h3> {product.name} PRODUCT NAME PLACEHOLDER </h3>
+            <h3> {product.name} </h3>
             <img src={product.image} alt="image"/>
             <div>   
-                <div>  {product.price} $CASHMONEIES </div>
                 <p>
-                    {product.discription} PRODUCT DESCRIPTION
+                    {product.discription}
                 </p>
-                {/* Reviews component */}
             </div>
-            {/* AddToCart component */}
         </div>
     )
     
