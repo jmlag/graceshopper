@@ -4,11 +4,8 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {Main, Login, Signup, UserHome} from './components'; //doesn't work if I put ProductsList/Product in here for some reason
+import {Main, Login, Signup, UserHome, ProductsList, Product, Cart} from './components'; 
 import {me} from './store';
-
-import ProductsList from "./components/ProductsList"; 
-import Product from "./components/Product";
 
 /**
  * COMPONENT
@@ -30,6 +27,7 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/cart" component={Cart} /> 
             <Route exact path="/packages" component={ProductsList} /> 
             <Route exact path="/packages/:productId" render={ (props) => (<Product 
                 product={{
