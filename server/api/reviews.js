@@ -3,14 +3,18 @@ const { Review, Package, User } = require("../db/models");
 module.exports = router;
 
 router.get("/", (req, res, next) => {
-  console.log('this ran ---------------------------')
-  Review.findAll().then(reviews => res.json(reviews)).catch(next);
+  Review.findAll()
+  .then(reviews => res.json(reviews))
+  .catch(next);
 });
 
 router.post("/", (req, res, next) => {
-  User.findById(req.user.id).then(user =>
-    Review.create(req.body).then(review => res.json(review)).catch(next)
-  );
+  const review = Review.create(req.body)
+  const user = User.findById(req.user.id)
+  Promise.all([Review, User])
+  .then(([Review, User]) =>{
+      Review.setUser(User)
+  })
 });
 
 router.get("/:productId", (req, res, next) => {
