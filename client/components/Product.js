@@ -14,7 +14,7 @@ export default function Product(props) {
             {
                 !thumbnail ? (
                 <div>   
-                    PRODUCT DESCRIPTION <br/>
+                    PRODUCT {productId} DESCRIPTION <br/>
                     REVIEWS COMPONENT <br/>
                     ADD TO CART COMPONENT <br/>    
                 </div>) : ""

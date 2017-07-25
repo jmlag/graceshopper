@@ -4,10 +4,10 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {Main, Login, Signup, UserHome} from './components';
+import {Main, Login, Signup, UserHome} from './components'; //doesn't work if I put ProductsList/Product in here for some reason
 import {me} from './store';
 
-import ProductsList from "./components/ProductsList";
+import ProductsList from "./components/ProductsList"; 
 import Product from "./components/Product";
 
 /**
@@ -31,15 +31,17 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/packages" component={ProductsList} /> 
-             <Route exact path="/packages/:productId" render={ (props) => (<Product 
-              product={{
-                name: "prod" + props.match.params.productId,
-                image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-                price: "123456",
-                description: "product" + props.match.params.productId + "description",
-              }} 
-              productId={props.match.params.productId}
-              />)} />             
+            <Route exact path="/packages/:productId" render={ (props) => (<Product 
+                product={{
+                  name: "prod" + props.match.params.productId,
+                  image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+                  price: "123456",
+                  description: "product" + props.match.params.productId + "description",
+                }} 
+                productId={props.match.params.productId}
+              />)} 
+            /> 
+
             {
               isLoggedIn ?
                 <Switch>
