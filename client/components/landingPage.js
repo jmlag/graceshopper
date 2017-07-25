@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const LandingPage = () => {
   return (
@@ -14,7 +15,9 @@ const LandingPage = () => {
         </div>
         <br /><br />
         <div className = "row center">
-          <button className = "btn-large waves-effect tertiaryColor">Get Started</button>
+          <Link to = "/packages">
+            <button className = "btn-large waves-effect tertiaryColor">Get Started</button>
+          </Link>
         </div>
         <br /><br />
         <div className ="row">
