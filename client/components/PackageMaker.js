@@ -1,5 +1,5 @@
 //INCOMPLETE - NEEDS MODIFICATION
-
+// custom package maker, see https://ting.com/rates for example
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';

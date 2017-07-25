@@ -9,10 +9,13 @@ export default function Product(props) {
             <h3> {product.name} </h3>
             <img src={product.image} alt="image"/>
             <div>   
+                <div>  {product.price} </div>
                 <p>
                     {product.discription}
                 </p>
+                {/* Reviews component */}
             </div>
+            {/* AddToCart component */}
         </div>
     )
     
