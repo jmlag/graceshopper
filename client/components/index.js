@@ -10,3 +10,4 @@ export { default as ProductsList } from "./ProductsList";
 export { default as Product } from "./Product";
 export { default as Cart } from "./Cart";
 export { default as LandingPage } from './landingPage'
+export { default as Navbar } from './Navbar'

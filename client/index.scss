@@ -1,21 +1,38 @@
-body {
-  font-family: sans-serif;
+.mainColor {
+  background-color: #BE3144;
+}
 
-  a {
-    text-decoration: none;
-  }
+.mainColor-text {
+  color: #BE3144;
+}
 
-  label {
-    display: block;
-  }
+.secondaryColor {
+  background-color: #303841;
+}
 
-  nav a {
-    display: inline-block;
-    margin: 1em;
-  }
+.secondaryColor-text {
+  color: #303841;
+}
 
-  form div {
-    margin: 1em;
-    display: inline-block;
-  }
+.tertiaryColor {
+  background-color: #3A4750;
+}
+
+.tertiaryColor-text {
+  color: #3A4750;
+}
+
+.backgroundColor {
+  background-color: #D3D6DB;
+}
+
+.backgroundColor-text {
+  color: #D3D6DB;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
 }
