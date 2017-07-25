@@ -1,3 +1,4 @@
+//DO NOT USE
 //INCOMPLETE - NEEDS MODIFICATION
 // custom package maker, see https://ting.com/rates for example
 import React from 'react';

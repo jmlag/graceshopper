@@ -2,20 +2,24 @@ import React from "react";
 
 export default function Product(props) {
 
-    const product = props.Product;
+    const { product } = props;
+    const thumbnail = props.thumbnail || false;    
+    const productId = props.productId;
 
     return (
-        <div>       
-            <h3> {product.name} PRODUCT NAME PLACEHOLDER </h3>
+        <div> 
+            <h3> {product.name} </h3>
             <img src={product.image} alt="image"/>
-            <div>   
-                <div>  {product.price} $CASHMONEIES </div>
-                <p>
-                    {product.discription} PRODUCT DESCRIPTION
-                </p>
-                {/* Reviews component */}
-            </div>
-            {/* AddToCart component */}
+            <div>  ${product.price} </div>
+            {
+                !thumbnail ? (
+                <div>   
+                    PRODUCT DESCRIPTION <br/>
+                    REVIEWS COMPONENT <br/>
+                    ADD TO CART COMPONENT <br/>    
+                </div>) : ""
+            }
+
         </div>
     )
     
