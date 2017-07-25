@@ -12,3 +12,23 @@ router.get('/', (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 })
+
+router.get('/:id',(req, res, next)=>{
+  User.findOne({where:{
+    id:userId
+  }}).then(user => res.json(user))
+  .catch(next)
+})
+
+router.post('/', (req, res, next)=>{
+  User.create(req.body)
+  .then(user => res.json(user))
+  .catch(next)
+})
+
+router.put('/:userId',(req,res,next)=>{
+  User.findOne({where:{id:req.params.userId}})
+            .then(user => user.update({password:req.body.password}))
+            .then(result => res.status(201).json(result))
+    
+})
