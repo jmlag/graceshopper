@@ -30,6 +30,6 @@ router.put('/:packageId',(req,res,next)=>{
 router.delete("/:packageId", (req, res, next) => {
   Package.findById(req.params.packageId)
   .then( package => package.destroy({}) )
-  .then( result => res.status(204).json(result))
+  .then( result => res.status(204))
   .catch(next);
 })
