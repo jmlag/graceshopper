@@ -13,29 +13,39 @@ router.get('/', (req, res, next) => {
     .catch(next);
 })
 
-router.get('/:id',(req, res, next)=>{
-  User.findOne({where:{
-    id:userId
-  }}).then(user => res.json(user))
-  .catch(next);
+router.param('userId', (req, res, next, userId) => {
+  User.findById(userId)
+  .then(user => {
+    if(!user) {
+      const err = Error('User not found.')
+      err.status = 404
+      throw err
+    }
+
+    req.user = user
+    next()
+  })
+  .catch(next)
 })
 
-router.post('/', (req, res, next)=>{
-  User.create(req.body)
-  .then(user => res.json(user))
-  .catch(next);
+router.get('/:userId', (req, res, next) => {
+  res.json(req.user)
 })
 
 router.put('/:userId',(req,res,next)=>{
-  User.findOne({where:{id:req.params.userId}})
-  .then(user => user.update({password:req.body.password}))
+  req.user.update(req.body)
   .then(result => res.status(201).json(result))
-  .catch(next);    
+  .catch(next);
 })
 
-router.delete("/:userId", (req, res, next) => {
-   User.findById(req.params.userId)
-  .then( user => user.destroy({}) )
-  .then( result => res.sendStatus(204))
+router.delete('/:userId', (req, res, next) => {
+  req.user.destroy()
+  .then( () => res.sendStatus(204))
+  .catch(next);
+})
+
+router.post('/', (req, res, next) => {
+  User.create(req.body)
+  .then(user => res.json(user))
   .catch(next);
 })
