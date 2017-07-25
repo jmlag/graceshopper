@@ -9,3 +9,4 @@ export { Login, Signup } from "./auth-form";
 export { default as ProductsList } from "./ProductsList";
 export { default as Product } from "./Product";
 export { default as Cart } from "./Cart";
+export { default as LandingPage } from './landingPage'
