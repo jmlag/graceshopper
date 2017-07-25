@@ -1,6 +1,7 @@
 const Cart = require('./cart')
 const OrderHistory = require('./orderHistory')
 const Package = require('./package')
+const Review = require('./review')
 const Subscription = require('./subscription')
 const User = require('./user')
 /**
@@ -24,6 +25,15 @@ OrderHistory.belongsTo(User)
 
 Subscription.belongsTo(User)
 User.hasMany(Subscription)
+
+Review.belongsTo(User)
+User.hasMany(Review)
+
+Review.belongsTo(Subscription)
+Subscription.hasMany(Review)
+
+Review.belongsTo(Package)
+Package.hasMany(Review)
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
