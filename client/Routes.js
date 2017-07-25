@@ -4,7 +4,7 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {Main, Login, Signup, UserHome, ProductsList, Product, Cart, ReviewsList} from './components'; 
+import {Main, Login, Signup, UserHome, ProductsList, Product, Cart, ReviewsList, LandingPage, Navbar} from './components'; 
 import {me} from './store';
 
 /**
@@ -22,7 +22,9 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
-        <Main>
+        <div>
+
+          <Route path = "/" render = {() => <Navbar loggedIn = {isLoggedIn} />} />
           <Switch>
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
@@ -47,26 +49,27 @@ class Routes extends Component {
               />
             ) } />
             <Route path="/packages/:productId" render={ props => (<Product 
+            <Route exact path="/packages/:productId" render={ (props) => (<Product
                 product={{
                   name: "prod" + props.match.params.productId,
                   image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
                   price: "123456",
                   description: "product" + props.match.params.productId + "description",
-                }} 
+                }}
                 productId={props.match.params.productId}
-              />)} 
-            /> 
+              />)}
+            />
             {
               isLoggedIn ?
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
+                  <Route path="/home" component={UserHome} loggedIn = {isLoggedIn} />
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            <Route component={LandingPage} />
           </Switch>
-        </Main>
+        </div>
       </Router>
     )
   }
