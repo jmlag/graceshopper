@@ -29,3 +29,10 @@
 .backgroundColor-text {
   color: #D3D6DB;
 }
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
