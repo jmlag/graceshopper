@@ -10,25 +10,32 @@ router.get('/', (req, res, next) => {
     attributes: ['id', 'email']
   })
     .then(users => res.json(users))
-    .catch(next)
+    .catch(next);
 })
 
 router.get('/:id',(req, res, next)=>{
   User.findOne({where:{
     id:userId
   }}).then(user => res.json(user))
-  .catch(next)
+  .catch(next);
 })
 
 router.post('/', (req, res, next)=>{
   User.create(req.body)
   .then(user => res.json(user))
-  .catch(next)
+  .catch(next);
 })
 
 router.put('/:userId',(req,res,next)=>{
   User.findOne({where:{id:req.params.userId}})
-            .then(user => user.update({password:req.body.password}))
-            .then(result => res.status(201).json(result))
-    
+  .then(user => user.update({password:req.body.password}))
+  .then(result => res.status(201).json(result))
+  .catch(next);    
+})
+
+router.delete("/:userId", (req, res, next) => {
+   User.findById(req.params.userId)
+  .then( user => user.destroy({}) )
+  .then( result => res.sendStatus(204))
+  .catch(next);
 })
