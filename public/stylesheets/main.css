@@ -1,3 +1,35 @@
+.mainColor {
+  background-color: #BE3144;
+}
+
+.mainColor-text {
+  color: #BE3144;
+}
+
+.secondaryColor {
+  background-color: #303841;
+}
+
+.secondaryColor-text {
+  color: #303841;
+}
+
+.tertiaryColor {
+  background-color: #3A4750;
+}
+
+.tertiaryColor-text {
+  color: #3A4750;
+}
+
+.backgroundColor {
+  background-color: #D3D6DB;
+}
+
+.backgroundColor-text {
+  color: #D3D6DB;
+}
+
 .icon-block {
   padding: 0 15px;
 }
