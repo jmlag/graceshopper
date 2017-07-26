@@ -4,9 +4,8 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {LandingPage, Login, Signup, UserHome, ProductsList, Product, Cart, Navbar} from './components';
-import {me} from './store';
-
+import {Main, Login, Signup, UserHome, PackageList, Product, Cart, ReviewsList, LandingPage, Navbar} from './components'; 
+import {me, fetchPackages} from './store';
 /**
  * COMPONENT
  */
@@ -30,7 +29,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/packages" component={ProductsList} />
+            <Route exact path="/packages" component={PackageList} />
             <Route exact path="/packages/:productId" render={ (props) => (<Product
                 product={{
                   name: "prod" + props.match.params.productId,
@@ -72,6 +71,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(fetchPackages())
     }
   }
 }
