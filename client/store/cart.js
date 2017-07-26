@@ -42,3 +42,18 @@ export function deleteCart(){
     .catch(err => console.log(err))
   }
 }
+
+export default function cartReducer(state = [], action){
+  switch (action.type){
+    case GET_CART_FROM_SERVER:
+      return action.cart
+    case GET_CART_ITEM:
+      return [...state, action.item]
+    case REMOVE_CART_ITEM:
+      return [...state.filter(item => item.id !== state.id)]
+    case EMPTY_CART:
+      return []
+    default:
+      return state
+  }
+}
