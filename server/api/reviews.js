@@ -9,12 +9,13 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  const review = Review.create(req.body)
-  const user = User.findById(req.user.id)
-  Promise.all([Review, User])
-  .then(([Review, User]) =>{
-      Review.setUser(User)
-  })
+  const postedReview = Review.create(req.body)
+  const reviewer = req.user
+  Promise.all([postedReview, reviewer])
+  .then(([post, author]) =>{
+      post.setUser(author)
+      res.json(post)
+  }).catch(next)
 });
 
 router.get("/:productId", (req, res, next) => {
