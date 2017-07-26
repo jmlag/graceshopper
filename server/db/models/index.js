@@ -11,6 +11,7 @@ const User = require('./user')
  *    BlogPost.belongsTo(User)
  */
 Package.belongsToMany(Cart, {through: 'CartPackage'})
+Cart.belongsToMany(Package, {through: 'CartPackage'})
 
 Package.belongsToMany(OrderHistory, {through: 'OrderHistoryPackage'})
 
