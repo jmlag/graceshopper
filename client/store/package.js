@@ -29,6 +29,22 @@ export const putPackage = function(pkg){
 export const deletePackage = function(pkg){
   return function thunk(dispatch){
     axios.delete(`/api/package/${pkg.id}`)
-    .then(() => dispatch(removePac))
+    .then(() => dispatch(removePackage(pkg)))
+    .catch(err => console.log(err))
+  }
+}
+
+export default function packageReducer(state = [], action) {
+  switch (action.type){
+    case GET_PACKAGES_FROM_SERVER:
+      return action.pkgs
+    case GET_PACKAGE:
+      return [...state, action.pkg]
+    case REMOVE_PACKAGE:
+      return [...state.filter(pkg => pkg.id !== action.pkg.id)]
+    case EDIT_PACKAGE:
+      return state.map(pkg => pkg.id === action.pkg.id ? action.pkg : pkg)
+    default:
+      return state
   }
 }
