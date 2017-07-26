@@ -12,7 +12,7 @@ const emptyCart = item => ({type: EMPTY_CART, })
 
 export function fetchCart(userId){
   return function thunk(dispatch){
-    axios.get(`/api/cart/${userId}`)
+    axios.get(`/api/cart/`)
     .then(res => res.data)
     .then(cart => dispatch(getCartFromServer(cart)))
     .catch(err => console.log(err))
@@ -21,6 +21,6 @@ export function fetchCart(userId){
 
 export function deleteCartItem(userId){
   return function thunk(dispatch){
-    axios.put(`/api/cart/${userId}/remove`)
+    axios.put(`/api/cart/`)
   }
 }

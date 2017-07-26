@@ -19,8 +19,9 @@ router.use((req, res, next) => {
     }})
     .then(cart => {
       req.cart = cart
-      next()
+      return req.cart.getPackages()
     })
+    .then(() => next())
     .catch(next)
   } else {
     res.sendStatus(204)
