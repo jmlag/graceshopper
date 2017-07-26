@@ -20,7 +20,7 @@ module.exports = app
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-// if (process.env.NODE_ENV === 'development') require('../secrets')
+if (process.env.NODE_ENV === 'development') require('../secrets')
 
 
 // passport registration
@@ -49,7 +49,7 @@ const createApp = () => {
   app.use(passport.session())
 
   // auth and api routes
-  // app.use('/auth', require('./auth'))
+  app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
   // static file-serving middleware

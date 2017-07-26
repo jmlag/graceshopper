@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import history from './history';
 import {LandingPage, Login, Signup, UserHome, PackageList, Product, Cart, Navbar} from './components';
 import {me, fetchPackages} from './store';
-
+import Logging from './components/logging'
 /**
  * COMPONENT
  */
@@ -27,6 +27,7 @@ class Routes extends Component {
           <Route path = "/" render = {() => <Navbar loggedIn = {isLoggedIn} />} />
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route path="/modal" component={Logging} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
