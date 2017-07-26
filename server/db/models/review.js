@@ -3,8 +3,11 @@ const db = require('../db')
 
 const Review = db.define('review', {
   score: {
-    type: Sequelize.ENUM,
-    values: [1, 2, 3, 4, 5],
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 5,
+    },
   },
   date: {
     type: Sequelize.DATE,

@@ -4,9 +4,12 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {LandingPage, Login, Signup, UserHome, PackageList, Product, Cart, Navbar} from './components';
+import {Main, Login, Signup, UserHome, PackageList, Product, Cart, ReviewsList, LandingPage, Navbar} from './components'; 
 import {me, fetchPackages} from './store';
+<<<<<<< HEAD
 import Logging from './components/logging'
+=======
+>>>>>>> master
 /**
  * COMPONENT
  */
