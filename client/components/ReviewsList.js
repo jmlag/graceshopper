@@ -14,7 +14,7 @@ function ReviewsList (props) {
     <h4> Reviews list component  </h4>
 
     {
-        reviews.filter( review => review.productId === +productId).map( review => <li> <Review review={review} /> </li> )
+        reviews.filter( review => review.productId === productId).map( review => <li> <Review review={review} /> </li> )
     } 
 
     </ul>

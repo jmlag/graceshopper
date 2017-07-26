@@ -10,11 +10,11 @@ export default function Product(props) {
     const reviews = [{ score: 3, 
                        writtenReview: "review for product", 
                        date: 'December 25, 2017', 
-                       productId: 1 },
+                       productId: "1" },
                      { score: 4, 
                        writtenReview: "revieW for product", 
                        date: 'December 29, 2017', 
-                       productId: 2 }];
+                       productId: "2" }];
          
     return (
         <div>
