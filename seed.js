@@ -97,13 +97,12 @@ const seed = () => (
   })
   .then( reviews => {
     return Promise.all( [...reviews, Package.findAll() ] );
+    // returns [review1, review2, ..., review_n, [pkg1, pkg2, ..., pkg_n] ]
   })
   .then( arr => {
-    // let [rev1, rev2, rev3] = arr;
-    // let [pkg1, pkg2, pkg3] = arr[3];
     return Promise.all( arr[3].map( (pkg, i) => arr[i].setPackage(pkg) ))
   } )
-  .then(e => console.log("=============", e))
+  // .then(e => console.log("=============", e))
   // .then(() => console.log("set association"))
   .catch(console.error)
 );

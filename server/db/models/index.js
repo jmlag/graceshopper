@@ -11,20 +11,16 @@ const User = require('./user')
  *    BlogPost.belongsTo(User)
  */
 Package.belongsToMany(Cart, {through: 'CartPackage'})
-// Cart.hasMany(Package)
 
 Package.belongsToMany(OrderHistory, {through: 'OrderHistoryPackage'})
-// OrderHistory.hasMany(Package)
 
 Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
-// OrderHistory.hasMany(Subscription)
 
 Cart.belongsTo(User)
 
 OrderHistory.belongsTo(User)
 
 Subscription.belongsToMany(User, {through: 'UserSubscription'})
-// User.hasMany(Subscription)
 
 Review.belongsTo(User)
 User.hasMany(Review)
