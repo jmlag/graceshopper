@@ -4,9 +4,8 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {LandingPage, Login, Signup, UserHome, PackageList, Product, Cart, Navbar, ReviewsList} from './components';
+import {Main, Login, Signup, UserHome, ProductsList, Product, Cart, ReviewsList} from './components'; 
 import {me, fetchPackages} from './store';
-
 /**
  * COMPONENT
  */
