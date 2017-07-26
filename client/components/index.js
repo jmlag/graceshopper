@@ -6,8 +6,9 @@
 export { default as Main } from "./main";
 export { default as UserHome } from "./user-home";
 export { Login, Signup } from "./auth-form";
-export { default as ProductsList } from "./ProductsList";
-export { default as Product } from "./Product";
+export { default as PackageList } from "./PackageList";
 export { default as Cart } from "./Cart";
 export { default as ReviewsList } from "./ReviewsList";
-
+export { default as LandingPage } from './landingPage'
+export { default as Navbar } from './Navbar'
+export { default as Product } from './Product'

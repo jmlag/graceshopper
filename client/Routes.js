@@ -5,8 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
 import {Main, Login, Signup, UserHome, ProductsList, Product, Cart, ReviewsList} from './components'; 
-import {me} from './store';
-
+import {me, fetchPackages} from './store';
 /**
  * COMPONENT
  */
@@ -22,51 +21,37 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
-        <Main>
+        <div>
+
+          <Route path = "/" render = {() => <Navbar loggedIn = {isLoggedIn} />} />
           <Switch>
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/cart" component={Cart} /> 
-            <Route exact path="/packages" component={ProductsList} /> 
-            <Route exact path="packages/:productId/reviews" render={ props => (
-              <ReviewsList
-                reviews={[{
-                  score: 2.3,
-                  writtenReview: "review for product",
-                  date: "December 27, 2017",
-                  productId: 1,
-                },
-                {
-                  score: 3.9,
-                  writtenReview: "review for product",
-                  date: "December 28, 2017",
-                  productId: 2,
-                }
-                ]} 
-              />
-            ) } />
-            <Route path="/packages/:productId" render={ props => (<Product 
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/packages" component={PackageList} />
+            <Route exact path="/packages/:productId" render={ (props) => (<Product
+
                 product={{
                   name: "prod" + props.match.params.productId,
                   image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
                   price: "123456",
                   description: "product" + props.match.params.productId + "description",
-                }} 
+                }}
                 productId={props.match.params.productId}
-              />)} 
-            /> 
+              />)}
+            />
             {
               isLoggedIn ?
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
+                  <Route path="/home" component={UserHome} loggedIn = {isLoggedIn} />
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            <Route component={LandingPage} />
           </Switch>
-        </Main>
+        </div>
       </Router>
     )
   }
@@ -87,6 +72,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(fetchPackages())
     }
   }
 }
