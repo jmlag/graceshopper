@@ -59,6 +59,15 @@ const orderHistories = [
     cost: 81.95 },
 ];
 
+const subscriptions = [
+  { renewDay: 13,
+    cost: 13.99 },
+  { renewDay: 13,
+    cost: 14.95 },
+  { renewDay: 29,
+    cost: 112.95 },
+];
+
 const seed = () => (
   Promise.all(users.map(user =>
     User.create(user))
@@ -75,6 +84,10 @@ const seed = () => (
   Promise.all(orderHistories.map(orderHistory =>
     OrderHistory.create(orderHistory))
   ))
+  .then(() =>
+  Promise.all(subscriptions.map(subscription=>
+    Subscription.create(subscription)
+  )))
   // .then(() => {
   //   return Promise.all([Review.findById(1), User.findById(1)]);
   // })
