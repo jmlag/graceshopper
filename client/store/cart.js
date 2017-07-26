@@ -7,7 +7,7 @@ const EMPTY_CART = 'EMPTY_CART'
 
 const getCartFromServer = cart => ({type: GET_CART_FROM_SERVER, cart, })
 const getCartItem = item => ({type: GET_CART_ITEM, item, })
-const removeCartItem = item => ({type: REMOVE_CART_ITEM, item, })
+const removeCartItem = id => ({type: REMOVE_CART_ITEM, id, })
 const emptyCart = item => ({type: EMPTY_CART, })
 
 export function fetchCart(userId){
@@ -19,8 +19,24 @@ export function fetchCart(userId){
   }
 }
 
-export function deleteCartItem(userId){
+export function deleteCartItem(packageId){
   return function thunk(dispatch){
-    axios.put(`/api/cart/`)
+    axios.delete(`/api/cart/${packageId}`)
+    .then(() => dispatch(removeCartItem(packageId)))
+    .catch(err => console.log(err))
+  }
+}
+
+export function addCartItem(pkg){
+  return function thunk(dispatch){
+    axios.put('/api/cart', pkg)
+    .then(dispatch(getCartItem(pkg)))
+    .catch(err => console.log(err))
+  }
+}
+
+export function deleteCart(){
+  return function thunk(dispatch){
+    axios.delete
   }
 }
