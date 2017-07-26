@@ -5,22 +5,31 @@ import Review from "./Review";
 
 function ReviewsList (props) {
 
-    const { reviews } = props;
-    const productId = props.match.params.productId;
+    const reviews = props.reviews;
+    const productId = props.productId;
 
-  return (<ul>  
-    <li> Reviews list component  </li>
+  return (<div>
+      
+      <ul>  
+    <h4> Reviews list component  </h4>
 
     {
-        reviews.filter( review => review.productId === productId ).map( review => (
-            <li key={review.id}> <Review review={review} /> </li>
-        ))
-    }
+        reviews.filter( review => review.productId === +productId).map( review => <li> <Review review={review} /> </li> )
+    } 
+
+    </ul>
+
+
+    
     
 
-    </ul>); 
+    </div>); 
 }
 
+        /* reviews.filter( review => review.productId === productId ).map( review => (
+            <li key={review.id}> <Review review={review} /> </li>
+        )) */
+    
 // const mapStateToProps = function (state, ownProps) {
 //   return {
 //     reviews: state.reviews

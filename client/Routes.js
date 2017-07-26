@@ -4,7 +4,7 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {LandingPage, Login, Signup, UserHome, PackageList, Product, Cart, Navbar} from './components';
+import {LandingPage, Login, Signup, UserHome, PackageList, Product, Cart, Navbar, ReviewsList} from './components';
 import {me, fetchPackages} from './store';
 
 /**
@@ -31,23 +31,6 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/packages" component={PackageList} />
-            <Route exact path="packages/:productId/reviews" render={ props => (
-              <ReviewsList
-                reviews={[{
-                  score: 2.3,
-                  writtenReview: "review for product",
-                  date: "December 27, 2017",
-                  productId: 1,
-                },
-                {
-                  score: 3.9,
-                  writtenReview: "review for product",
-                  date: "December 28, 2017",
-                  productId: 2,
-                }
-                ]} 
-              />
-            ) } />
             <Route exact path="/packages/:productId" render={ (props) => (<Product
                 product={{
                   name: "prod" + props.match.params.productId,
