@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import Product from "./Product";
+import Package from "./Package";
 
 function PackageList (props) {
 
-  return (<div>
+  return (
+  <div>
     Packages list component
     {
       props.packages.map(pkg => <Package pkg = {pkg} />)
     }
     <NavLink to="/packages/1" >
-    <Product
+    <Package
       thumbnail={true}
       product={{
         name: "prod1",
@@ -23,7 +24,7 @@ function PackageList (props) {
     </NavLink>
 
     <NavLink to="/packages/2" >
-    <Product
+    <Package
       thumbnail={true}
       product={{
         name: "prod2",

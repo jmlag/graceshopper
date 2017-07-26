@@ -12,7 +12,7 @@ const editPackage = pkg => ({type: EDIT_PACKAGE, pkg, })
 
 export const postPackage = function(pkg){
   return function thunk(dispatch){
-    axios.post('/api/package', pkg)
+    axios.post('/api/packages', pkg)
     .then(postedPkg => dispatch(getPackage(postedPkg)))
     .catch(err => console.log(err))
   }
@@ -20,7 +20,7 @@ export const postPackage = function(pkg){
 
 export const putPackage = function(pkg){
   return function thunk(dispatch){
-    axios.put(`/api/package/${pkg.id}`, pkg)
+    axios.put(`/api/packages/${pkg.id}`, pkg)
     .then(putPkg => dispatch(editPackage(putPkg)))
     .catch(err => console.log(err))
   }
@@ -28,8 +28,16 @@ export const putPackage = function(pkg){
 
 export const deletePackage = function(pkg){
   return function thunk(dispatch){
-    axios.delete(`/api/package/${pkg.id}`)
+    axios.delete(`/api/packages/${pkg.id}`)
     .then(() => dispatch(removePackage(pkg)))
+    .catch(err => console.log(err))
+  }
+}
+
+export const fetchPackages = function(){
+  return function thunk(dispatch){
+    axios.get('/api/packages')
+    .then(packages => dispatch(getPackagesFromServer(packages)))
     .catch(err => console.log(err))
   }
 }
