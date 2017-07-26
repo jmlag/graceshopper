@@ -1,20 +1,25 @@
 import React from "react"
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const LandingPage = () => {
   return (
     <div className = "section no-pad-bot">
       <div className = "container">
+        <br /><br />
         <h1 className = "header center mainColor-text">NetEscape</h1>
         <div className = "row center">
           <h5 className = "header light col s12">
             Voted best ISP in 2020. NetEscape is your premiere multi-tiered ISP.
           </h5>
         </div>
+        <br /><br />
         <div className = "row center">
-          <button className = "btn-large waves-effect tertiaryColor">Get Started</button>
+          <Link to = "/packages">
+            <button className = "btn-large waves-effect tertiaryColor">Get Started</button>
+          </Link>
         </div>
-
+        <br /><br />
         <div className ="row">
           <div className ="col s12 m4">
             <div className ="icon-block">
@@ -24,7 +29,6 @@ const LandingPage = () => {
               <p className ="light">No two people are the same, and no two people's browsing habits are the same either. Pay for only the parts of the internet that <i>you</i> use.</p>
             </div>
           </div>
-
           <div className ="col s12 m4">
             <div className ="icon-block">
               <h2 className ="center mainColor-text"><i className ="material-icons">group</i></h2>
