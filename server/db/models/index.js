@@ -29,9 +29,6 @@ Subscription.belongsToMany(User, {through: 'UserSubscription'})
 Review.belongsTo(User)
 User.hasMany(Review)
 
-Review.belongsTo(Subscription)
-Subscription.hasMany(Review)
-
 Review.belongsTo(Package)
 Package.hasMany(Review)
 /**
