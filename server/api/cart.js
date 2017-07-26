@@ -34,3 +34,9 @@ router.delete('/', (req, res, next) => {
   .then(res.sendStatus(204))
   .catch(next)
 })
+
+router.delete('/:packageId', (req, res, next) => {
+  req.cart.removePackage(req.params.packageId)
+  .then(res.sendStatus(204))
+  .catch(next)
+})
