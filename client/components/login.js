@@ -10,31 +10,44 @@ class LoggingBox extends React.Component {
       toggle: true
     };
     this.panelClickHandle = this.panelClickHandle.bind(this);
+    this.toggleBtn = this.toggleBtn.bind(this)
     this.loginHandler = this.loginHandler.bind(this)
+    this.registerHandler = this.registerHandler.bind(this)
   }
 
   panelClickHandle(e) {
     e.preventDefault();
-    if (this.state.toggle === true) {
       this.setState({ toggle: false });
-    } else {
-      this.setState({ toggle: true });
-    }
   }
 
+  toggleBtn(e){
+    e.preventDefault()
+    this.setState({toggle:true})
+  }
   loginHandler(e){
     e.preventDefault()
+    console.log()
     let email = e.target.email.value
     let password = e.target.password.value
     this.props.auth(email, password, 'login')
   }
 
+  registerHandler(e){
+    e.preventDefault()
+    let email = e.target.email.value
+    let password = e.target.password.value
+    this.props.auth(email, password, 'signup')
+  }
+
   render() {
+
+    const {error} = this.props;
+   
     return (
       <div className="form">
         <div
           className={"form-toggle " + (this.state.toggle ? "" : "visible")}
-          onClick={e => this.panelClickHandle(e)}
+          onClick={e => this.toggleBtn(e)}
         />
 
         <div
@@ -74,12 +87,13 @@ class LoggingBox extends React.Component {
               <div className="form-group">
                 <button type="submit">Log In</button>
               </div>
+                 {error && error.response && <div> {error.response.data} </div>}
             </form>
           </div>
         </div>
 
         <div
-          onClick={e => this.panelClickHandle(e)}
+          onClick={(this.state.toggle ? (e) => this.panelClickHandle(e): '')}
           className={
             "form-panel two " + (this.state.toggle ? "hidden" : "active")
           }
@@ -88,7 +102,7 @@ class LoggingBox extends React.Component {
             <h1>Register Account</h1>
           </div>
           <div className="form-content">
-            <form>
+            <form onSubmit={(e) => this.registerHandler(e)}>
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <input
@@ -125,6 +139,7 @@ class LoggingBox extends React.Component {
                   Register
                 </button>
               </div>
+              {error && error.response && <div> {error.response.data} </div>}
             </form>
           </div>
         </div>
@@ -134,7 +149,13 @@ class LoggingBox extends React.Component {
 }
 
 
-const mapStateToProps = null;
+const mapLogin = (state) => {
+  console.log(state.user)
+  return {
+    error: state.user.error
+  }
+}
+
 const mapDispatchToProps = {auth}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoggingBox)
+export default connect(mapLogin, mapDispatchToProps)(LoggingBox)
