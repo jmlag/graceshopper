@@ -5,6 +5,13 @@ const router = require('express').Router()
 const { Cart } = require('../db/models')
 module.exports = router
 
+router.post('/', function(req, res, next){
+  const cart = Cart.build(req.body)
+  cart.setUser(req.user)
+  cart.save()
+  .then(savedCart => res.status(200).json(savedCart))
+})
+
 router.use((req, res, next) => {
   if(req.user) {
     Cart.findOne({where: {
@@ -25,7 +32,6 @@ router.get('/', (req, res, next) => {
   res.status(200).json(req.cart)
 })
 
-//how do i make this drier
 router.put('/', (req, res, next) => {
   req.cart.update(req.body)
   .then(updatedCart => res.status(200).json(updatedCart))
