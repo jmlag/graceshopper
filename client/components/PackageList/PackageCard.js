@@ -6,15 +6,16 @@ export default function PackageCard(props){
   return (
     <div className = "col s12 m6">
       <div className = "card">
-        <div className = "card-image">
-          <img className = "responsive-img" src = {pkg.image} />
-          <span className = "card-title">{pkg.name} - <i>{pkg.price}</i></span>
-        </div>
+        <NavLink to = {`/packages/${pkg.id}`}>
+          <div className = "card-image">
+            <img className = "responsive-img" src = {pkg.image} />
+          </div>
+        </NavLink>
         <div className = "card-content">
-          <p>{pkg.description}</p>
+          <h3>{pkg.name} - ${pkg.price}</h3>
         </div>
         <div className = "card-action">
-          <button>Add to Cart</button>
+          <button className = "btn">Add to Cart</button>
         </div>
       </div>
     </div>

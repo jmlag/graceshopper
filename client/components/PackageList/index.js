@@ -9,7 +9,7 @@ function PackageList (props) {
   <div className = "container">
     Packages list component
     <div className = "row">
-      <NavLink to="/packages/1" >
+
       <PackageCard
         thumbnail={true}
         pkg={{
@@ -17,11 +17,9 @@ function PackageList (props) {
           image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
           price: "123456",
           description: "product 1 description",
+          id: 1,
         }}
       />
-      </NavLink>
-
-      <NavLink to="/packages/2" >
       <PackageCard
         thumbnail={true}
         pkg={{
@@ -29,12 +27,12 @@ function PackageList (props) {
           image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
           price: "654321",
           description: "product 2 description",
+          id: 2,
         }}
       />
-      </NavLink>
     </div>
-
-    </div>);
+  </div>
+);
 }
 
 const mapStateToProps = function (state, ownProps) {
