@@ -4,6 +4,7 @@ const Package = require('./server/db/models/package');
 const Review = require("./server/db/models/review");
 const OrderHistory = require("./server/db/models/orderHistory");
 const Subscription = require("./server/db/models/subscription");
+const Cart = require("./server/db/models/cart");
 const Promise = require("bluebird");
 
 const users = [
@@ -88,12 +89,13 @@ const seed = () => (
   Promise.all(subscriptions.map(subscription=>
     Subscription.create(subscription)
   )))
-  // .then(() => {
-  //   return Promise.all([Review.findById(1), User.findById(1)]);
-  // })
-  // .spread( (rev, usr) => {
-  //   return rev.setUser(usr);
-  // })
+  .then(() => {
+    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
+  })
+  .spread( (reviews, usr1, usr3, usr5) => {
+    return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);
+  })
+  .then(e => console.log("=============", e))
   // .then(() => console.log("set association"))
   .catch(console.error)
 );
