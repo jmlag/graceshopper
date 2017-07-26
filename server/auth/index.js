@@ -3,7 +3,6 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  console.log('this ran')
   User.findOne({where: {email: req.body.email}})
     .then(user => {
       if (!user) {

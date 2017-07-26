@@ -26,7 +26,6 @@ class LoggingBox extends React.Component {
   }
   loginHandler(e){
     e.preventDefault()
-    console.log()
     let email = e.target.email.value
     let password = e.target.password.value
     this.props.auth(email, password, 'login')
