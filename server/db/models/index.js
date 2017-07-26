@@ -14,23 +14,17 @@ Package.belongsToMany(Cart, {through: 'CartPackage'})
 Cart.belongsToMany(Package, {through: 'CartPackage'})
 
 Package.belongsToMany(OrderHistory, {through: 'OrderHistoryPackage'})
-// OrderHistory.hasMany(Package)
 
 Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
-// OrderHistory.hasMany(Subscription)
 
 Cart.belongsTo(User)
 
 OrderHistory.belongsTo(User)
 
 Subscription.belongsToMany(User, {through: 'UserSubscription'})
-// User.hasMany(Subscription)
 
 Review.belongsTo(User)
 User.hasMany(Review)
-
-Review.belongsTo(Subscription)
-Subscription.hasMany(Review)
 
 Review.belongsTo(Package)
 Package.hasMany(Review)
