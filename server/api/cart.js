@@ -6,10 +6,9 @@ const { Cart, Package } = require('../db/models')
 module.exports = router
 
 router.use((req, res, next) => {
-  req.Urser ={id: 2,}
 
   Cart.findOrCreate({where: {
-    userId: req.User.id,
+    userId: req.user.id,
   }})
   .spread((cart, created) => {
     req.cart = cart
