@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { logout } from '../../store'
 import { Navbar } from 'react-materialize'
 import NavItem from './NavItem'
 
@@ -14,12 +14,15 @@ function Nav (props) {
         !props.loggedIn? (
           <NavItem to="/login">Login</NavItem>
         ) : (
-          <NavItem to="/logout">Logout</NavItem>
+          <li>
+            <a onClick={props.logout}>Logout</a>
+          </li>
         )
       }
     </Navbar>
   )
 }
+const mapToState = null;
+const mapToDispatch = {logout}
 
-
-export default connect()(Nav)
+export default connect(mapToState,mapToDispatch)(Nav)
