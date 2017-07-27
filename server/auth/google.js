@@ -3,7 +3,7 @@ const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
 module.exports = router
-
+require('../../secrets')
 /**
  * For OAuth keys and other secrets, your Node process will search
  * process.env to find environment variables. On your production server,
@@ -25,6 +25,7 @@ const googleConfig = {
 };
 
 const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
+  console.log('------------------',profile)
   const googleId = profile.id
   const name = profile.displayName
   const email = profile.emails[0].value

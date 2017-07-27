@@ -258,3 +258,8 @@ html {
   background: #FFFFFF !important;
   color: #4285F4 !important;
 }
+
+.login-img{
+  width:40%;
+  height: auto;
+}
