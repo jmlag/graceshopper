@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 
 import CartItem from './CartItem'
 
+import { deleteCartItem } from '../../store'
+
 //map half the cart items to one column and the other half to the other
 function Cart(props){
   return (
-    <div className="container scrollable">
+    <div className="container scrollablegi">
       <br />
       <h1 className="header center mainColor-text">Cart</h1>
       <br />
@@ -31,7 +33,7 @@ function Cart(props){
       </div>
       <div className = "row">
         <div className = "col s6 m3 offset-m6">
-          <h5 className="inline">Total Cost: </h5>
+          <h5 className="inline mainColor-text">Total Cost: </h5>
           <h5 className="light inline">
             $
             {
@@ -42,7 +44,7 @@ function Cart(props){
           </h5>
         </div>
         <div className = "col s6 m3">
-          <button className="right btn">Checkout</button>
+          <button className="right btn tertiaryColor waves-effect">Checkout</button>
         </div>
       </div>
     </div>

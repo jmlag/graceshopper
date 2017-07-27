@@ -1,6 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default function CartItem(props){
+import { deleteCartItem } from '../../store'
+
+function CartItem(props){
   const pkg = props.pkg
 
   return (
@@ -10,6 +13,27 @@ export default function CartItem(props){
       <p>
         ${pkg.price}
       </p>
+      <a className="secondary-content clickable" onClick = {() => props.delCartItem(pkg.id)}>
+        <i className="material-icons secondaryColor-text">
+          delete
+        </i>
+      </a>
     </li>
   )
 }
+
+function mapStateToProps(state, oldProps){
+  return {
+    pkg: oldProps.pkg,
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    delCartItem(packageId){
+      dispatch(deleteCartItem(packageId))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem)
