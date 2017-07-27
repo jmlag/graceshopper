@@ -5,6 +5,7 @@ const Review = require("./server/db/models/review");
 const OrderHistory = require("./server/db/models/orderHistory");
 const Subscription = require("./server/db/models/subscription");
 const Cart = require("./server/db/models/cart");
+const CartItem = require("./server/db/models/cartItem");
 const Promise = require("bluebird");
 
 const users = [
@@ -90,10 +91,10 @@ const seed = () => (
     Subscription.create(subscription)
   )))
   .then(() => {
-    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
+    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]); 
   })
   .spread( (reviews, usr1, usr3, usr5) => {
-    return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);
+    return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);//associate reviews with user
   })
   .then( reviews => {
     return Promise.all( [...reviews, Package.findAll() ] );
@@ -101,9 +102,21 @@ const seed = () => (
   })
   .then( arr => {
     return Promise.all( arr[3].map( (pkg, i) => arr[i].setPackage(pkg) ))
+    //associate reviews with package
   } )
+  .then(() => {
+    return Promise.all([Cart.create(), Cart.create(), Cart.create()]); 
+  })
+  .then(carts => {
+    return Promise.all([carts, User.findById(2), User.findById(4), User.findById(6) ])
+  })
+  .then( arr => {
+    return Promise.all(arr[0].map((cart,index) => {
+        return cart.setUser(arr[index+1]);
+      }))
+    })
   // .then(e => console.log("=============", e))
-  // .then(() => console.log("set association"))
+  .then(() => console.log("set association"))
   .catch(console.error)
 );
 
