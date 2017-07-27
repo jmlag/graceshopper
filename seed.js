@@ -20,15 +20,15 @@ const users = [
 
 const packages = [
   { name: "Internet 10", 
-    image: "http://www.drodd.com/images15/1-7.jpg", 
+    imageUrl: "http://www.drodd.com/images15/1-7.jpg", 
     price: 1399, 
     description: "Browse, stay connected to the world, or keep in touch with family or friends." },
   { name: "Internet 11", 
-    image: "http://www.drodd.com/images15/2-23.jpg", 
+    imageUrl: "http://www.drodd.com/images15/2-23.jpg", 
     price: 11199, 
     description: "Our Internet goes to 11." },
   { name: "Internet 1000", 
-    image: "http://www.drodd.com/images15/3-12.jpg", 
+    imageUrl: "http://www.drodd.com/images15/3-12.jpg", 
     price: 50099, 
     description: "*not actually 1Gbps." }
 ];
