@@ -24,11 +24,12 @@ if (process.env.NODE_ENV === 'development') require('../secrets')
 
 
 // passport registration
-passport.serializeUser((user, done) => done(null, user.id))
-passport.deserializeUser((id, done) =>
+passport.serializeUser((user, done) => {
+  done(null, user.id)})
+passport.deserializeUser((id, done) =>{
   db.models.user.findById(id)
     .then(user => done(null, user))
-    .catch(done))
+    .catch(done)})
 
 const createApp = () => {
   // logging middleware

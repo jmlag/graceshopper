@@ -30,7 +30,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.logout()
-  res.redirect('/')
+  res.redirect('/home')
 })
 
 router.get('/me', (req, res) => {
