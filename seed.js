@@ -20,16 +20,16 @@ const users = [
 
 const packages = [
   { name: "Internet 10", 
-    imageUrl: "http://www.drodd.com/images15/1-7.jpg", 
-    price: 1399, 
+    image: "http://www.drodd.com/images15/1-7.jpg", 
+    price: 13.99, 
     description: "Browse, stay connected to the world, or keep in touch with family or friends." },
   { name: "Internet 11", 
-    imageUrl: "http://www.drodd.com/images15/2-23.jpg", 
-    price: 11199, 
+    image: "http://www.drodd.com/images15/2-23.jpg", 
+    price: 111.99, 
     description: "Our Internet goes to 11." },
   { name: "Internet 1000", 
-    imageUrl: "http://www.drodd.com/images15/3-12.jpg", 
-    price: 50099, 
+    image: "http://www.drodd.com/images15/3-12.jpg", 
+    price: 500.99, 
     description: "*not actually 1Gbps." }
 ];
 
@@ -61,11 +61,11 @@ const orderHistories = [
 ];
 
 const subscriptions = [
-  { content: 13,
+  { renewDay: 13,
     cost: 1399 },
-  { content: 13,
+  { renewDay: 13,
     cost: 1495 },
-  { content: 29,
+  { renewDay: 29,
     cost: 11295 },
 ];
 
