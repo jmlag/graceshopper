@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { Review, Package, User } = require("../db/models");
 module.exports = router;
 
+// when would we need all reviews ever?
+// GET /packages/:pkgId/reviews seems more sensible
 router.get("/", (req, res, next) => {
   Review.findAll()
   .then(reviews => res.json(reviews))
@@ -26,13 +28,15 @@ router.post("/", (req, res, next) => {
   }).catch(next)
 });
 
+
+// GET /reviews/1 - seems to imply the id is of a review, btu is product?
 router.get("/:productId", (req, res, next) => {
   Review.findAll({ where: { productId: req.params.productId } })
     .then(reviews => res.json(reviews))
     .catch(next);
 });
 
-
+// this seems to make sense to me
 router.delete('/:reviewId', (req,res,next) => {
   Review.findById(req.params.reviewId)
     .then(review => {

@@ -51,12 +51,12 @@ router.use((req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-  res.status(200).json(req.cart)
+  res.json(req.cart)
 })
 
 router.put('/', (req, res, next) => {
   req.cart.update(req.body)
-  .then(updatedCart => res.status(200).json(updatedCart))
+  .then(updatedCart => res.status(201).json(updatedCart))
   .catch(next)
 })
 
