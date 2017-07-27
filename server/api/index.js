@@ -1,6 +1,7 @@
 const router = require('express').Router()
 module.exports = router
 
+// let's be consistent about single vs. double quotes
 router.use('/users', require('./users'))
 router.use('/orderHistory', require('./orderHistory'))
 router.use('/reviews', require('./reviews'))

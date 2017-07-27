@@ -1,3 +1,5 @@
+// filename inconsistent with other component files
+
 import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -6,7 +8,10 @@ const LandingPage = () => {
   return (
     <div className = "section no-pad-bot">
       <div className = "container">
-        <br /><br />
+        <br /><br /> {/* it is generally discouraged to use <br/>s for spacing
+        because it's using the HTML for something completely presentational.
+        it is considered better practice to create spacing using CSS via margins
+        or padding (depending on your goal) */}
         <h1 className = "header center mainColor-text">NetEscape</h1>
         <div className = "row center">
           <h5 className = "header light col s12">

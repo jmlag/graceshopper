@@ -21,6 +21,8 @@ module.exports = app
  * Node process on process.env
  */
 // if (process.env.NODE_ENV === 'development') require('../secrets')
+/* ^ are you guys not planning to use google oauth, or are just
+waiting to get to it later? ^ */
 
 
 // passport registration

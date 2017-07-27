@@ -3,8 +3,8 @@ const { Subscription } = require('../db/models');
 
 module.exports = router;
 
-router.get('/', (req, res, next) => {
-  Subscription.findAll({})
+router.get('/', (req, res, next) => { // make function vs. arrow uniform
+  Subscription.findAll({}) // unnecessary empty obj
   .then(subscriptions => res.json(subscriptions))
   .catch(next);
 })
@@ -30,7 +30,7 @@ router.get('/:id', function(req, res, next){
 
 router.put('/:id', function(req, res, next){
   req.subscription.update(req.body)
-  .then(subscription => res.status(200).json(subscription))
+  .then(subscription => res.status(200).json(subscription)) // 201 status prob better
   .catch(next)
 })
 

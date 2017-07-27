@@ -8,12 +8,15 @@ const Review = db.define('review', {
       min: 1,
       max: 5,
     },
+    // make required?
   },
   date: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW,
+    // once again, maybe make use of 'createdAt' and/or 'updatedAt' (or was it
+    // 'lastUpdated'?)
   },
-  writtenReview: {
+  writtenReview: { // 'content' a more eloquent name for this field?
     type: Sequelize.TEXT,
   }
 })

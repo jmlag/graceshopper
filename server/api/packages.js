@@ -1,9 +1,10 @@
+// let's get some consistency in the quotation marks...
 const router = require('express').Router()
 const {Package} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Package.findAll({})
+  Package.findAll({}) // don't need to pass this empty obj
    .then(packages => res.json(packages))
    .catch(next);
 })
@@ -29,18 +30,18 @@ router.get('/:packageId', (req, res, next) => {
 
 router.put('/:packageId', (req, res, next) => {
   req.pkg.update(req.body)
-  .then(result => res.status(201).json(result))
+  .then(result => res.status(201).json(result)) // maybe something more descriptive than `result`
   .catch(next);
 })
 
 router.delete("/:packageId", (req, res, next) => {
-  req.pkg.destroy({})
-  .then( result => res.sendStatus(204))
+  req.pkg.destroy({}) // don't need this empty obj
+  .then( result => res.sendStatus(204)) // format/spacing? no-unused-vars?
   .catch(next);
 })
 
 router.post('/', (req, res, next) => {
   Package.create(req.body)
-  .then(pkg => res.json(pkg))
+  .then(pkg => res.json(pkg)) // 201 status?
   .catch(next);
 })

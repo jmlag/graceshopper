@@ -1,3 +1,6 @@
+/* I know this came with the starting point, but if you guys decide to go with the
+capitalized-camel-case convention with these components, you should probaby 
+update these premade filenames to match as well */
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'

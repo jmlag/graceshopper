@@ -1,3 +1,6 @@
+// consider creating a small seed-file so you guys all have uniform sample data
+// to work off during development
+
 const Cart = require('./cart')
 const OrderHistory = require('./orderHistory')
 const Package = require('./package')
@@ -10,8 +13,19 @@ const User = require('./user')
  *
  *    BlogPost.belongsTo(User)
  */
+
+/*
+
+you only need to supply the "through" field if you want the table to be named something
+very specific - it will be a underscore concatenation of the two table names otherwise
+Also - these join tables have uppercase names, but the other tables are named with
+lowercase; might be a good idea to make uniform
+
+*/
+
 Package.belongsToMany(Cart, {through: 'CartPackage'})
 // Cart.hasMany(Package)
+// ^ remove these lines if the associations are no longer going to be done ^
 
 Package.belongsToMany(OrderHistory, {through: 'OrderHistoryPackage'})
 // OrderHistory.hasMany(Package)

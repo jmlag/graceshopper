@@ -5,11 +5,14 @@ import PackageCard from "./PackageCard";
 
 function PackageList (props) {
 
+// indentation is off
   return (
   <div className = "container">
     Packages list component
     <div className = "row">
 
+      {/* seems a little silly to have this hardcorded considering the reducer & props are already
+      in place, but I'll just assume you guys will get to this eventually! just don't forget! */}
       <PackageCard
         thumbnail={true}
         pkg={{

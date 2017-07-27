@@ -9,8 +9,16 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  const postedReview = Review.create(req.body)
+  const postedReview = Review.create(req.body) // feeding entire req.body tends to be unsafe
   const reviewer = req.user
+
+  /* this Promise.all wrapper seems rather silly when you can do something like:
+        Review.create(reviewData)
+          .then(review => review.setUser(req.user))
+          .then(reviewWithUser => res.json(reviewWithUser));
+          .catch(next);
+  
+  */
   Promise.all([postedReview, reviewer])
   .then(([post, author]) =>{
       post.setUser(author)
