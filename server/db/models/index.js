@@ -4,20 +4,22 @@ const Package = require('./package')
 const Review = require('./review')
 const Subscription = require('./subscription')
 const User = require('./user')
+const CartItem = require('./cartItem')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
  *
  *    BlogPost.belongsTo(User)
  */
-Package.belongsToMany(Cart, {through: 'CartPackage'})
-Cart.belongsToMany(Package, {through: 'CartPackage'})
 
 Package.belongsToMany(OrderHistory, {through: 'OrderHistoryPackage'})
 
 Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
 
 Cart.belongsTo(User)
+Package.belongsToMany(CartItem, {through: 'CartItemPackage'})
+CartItem.hasOne(Package)
+Cart.hasMany(CartItem)
 
 OrderHistory.belongsTo(User)
 
@@ -36,6 +38,7 @@ Package.hasMany(Review)
  */
 module.exports = {
   Cart,
+  CartItem,
   OrderHistory,
   Package,
   Subscription,
