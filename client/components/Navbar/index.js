@@ -1,22 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Navbar, NavItem } from 'react-materialize'
+import { logout } from '../../store'
+import { Navbar } from 'react-materialize'
+import NavItem from './NavItem'
 
-export default function nav (props) {
+function Nav (props) {
 
   return (
-    <Navbar className= "right secondaryColor">
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/packages">Packages</Link></li>
-      <li><Link to="/cart">Cart</Link></li>
+    <Navbar className="right secondaryColor">
+      <NavItem exact to="/" index={true}>Home</NavItem>
+      <NavItem to="/packages">Packages</NavItem>
       {
-        !props.loggedIn ? (
-          <li><Link to = "/login">Login</Link></li>
+        !props.loggedIn? (
+          <NavItem to="/login">Login</NavItem>
         ) : (
-          <li><Link to = "/logout">Logout</Link></li>
+          <li>
+            <a onClick={props.logout}>Logout</a>
+          </li>
         )
       }
     </Navbar>
   )
 }
+const mapToState = null;
+const mapToDispatch = {logout}
+
+export default connect(mapToState,mapToDispatch)(Nav)

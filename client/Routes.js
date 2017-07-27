@@ -4,8 +4,8 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {Main, Login, Signup, UserHome, PackageList, Product, Cart, ReviewsList, LandingPage, Navbar} from './components'; 
-import {me, fetchPackages} from './store';
+import {Main, Login, Signup, UserHome, PackageList, Product, Cart, ReviewsList, LandingPage, Navbar} from './components';
+import {me, getPackages} from './store';
 
 
 /**
@@ -42,14 +42,6 @@ class Routes extends Component {
                 productId={props.match.params.productId}
               />)}
             />
-            {
-              isLoggedIn ?
-                <Switch>
-                  {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} loggedIn = {isLoggedIn} />
-                </Switch> : null
-            }
-            {/* Displays our Login component as a fallback */}
             <Route component={LandingPage} />
           </Switch>
         </div>
@@ -73,7 +65,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-      dispatch(fetchPackages())
+      dispatch(getPackages())
     }
   }
 }

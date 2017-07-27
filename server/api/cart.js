@@ -1,12 +1,9 @@
-
-//req.user
 const router = require('express').Router()
 
-const { Cart, Package } = require('../db/models')
+const { Cart } = require('../db/models')
 module.exports = router
 
 router.use((req, res, next) => {
-
   Cart.findOrCreate({where: {
     userId: req.user.id,
   }})

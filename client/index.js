@@ -5,9 +5,6 @@ import {Provider} from 'react-redux'
 import store from './store'
 import Routes from './Routes'
 
-// establishes socket connection
-import socket from './socket'
-
 ReactDOM.render(
   <Provider store={store}>
     <Routes />
