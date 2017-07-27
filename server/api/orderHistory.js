@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { OrderHistory } = require('../db/models')
+const { OrderHistory, Package } = require('../db/models')
 
 module.exports = router
 
@@ -9,42 +9,46 @@ router.get('/', (req, res, next) => {
   .catch(next)
 })
 
-router.param('id', function(req, res, next, id) {
-  OrderHistory.findById(id)
+router.param('id', (req, res, next, id) => {
+  OrderHistory.findById(id, {include: [{
+    model: Package,
+  }]})
   .then(history => {
-    if(!history) {
+    if (!history) {
       const err = Error('OrderHistory not found.')
       err.status = 404
       throw err
     }
-    history.getPackages()
-
     req.orderHistory = history
     next()
   })
   .catch(next)
 })
 
-
-router.get('/:id', function(req, res, next){
+router.get('/:id', (req, res, next) => {
   res.json(req.orderHistory)
 })
 
-router.put('/:id', function(req, res, next){
-  req.orderHistory.update(req.body)
-  .then(orderHistory => res.status(200).json(orderHistory))
+router.put('/:id', (req, res, next) => {
+  req.orderHistory.update({
+    date: req.body.date,
+    cost: req.body.cost,
+  })
+  .then(orderHistory => res.json(orderHistory))
   .catch(next)
 })
 
-router.delete('/:id', function(req, res, next){
+router.delete('/:id', (req, res, next) => {
   req.orderHistory.destroy()
   .then(res.sendStatus(204))
   .catch(next)
 })
 
-router.post('/', function(req, res, next){
-  const orderHistory = OrderHistory.build(req.body)
-  orderHistory.save()
+router.post('/', (req, res, next) => {
+  OrderHistory.create({
+    date: req.body.date,
+    cost: req.body.cost,
+  })
   .then(order => res.json(order))
   .catch(next)
 })

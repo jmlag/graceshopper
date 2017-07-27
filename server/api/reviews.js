@@ -1,24 +1,25 @@
-const router = require("express").Router();
-const { Review, Package, User } = require("../db/models");
+const router = require('express').Router();
+const { Review, Package, User } = require('../db/models');
 module.exports = router;
 
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
   Review.findAll()
   .then(reviews => res.json(reviews))
   .catch(next);
 });
 
-router.post("/", (req, res, next) => {
-  const postedReview = Review.create(req.body)
-  const reviewer = req.user
-  Promise.all([postedReview, reviewer])
-  .then(([post, author]) =>{
-      post.setUser(author)
-      res.json(post)
-  }).catch(next)
+router.post('/', (req, res, next) => {
+  Review.create({
+    score: req.body.score,
+    date: req.body.date,
+    writtenReview: req.body.writtenReview,
+  })
+  .then(review => review.setUser(req.user))
+  .then(reviewWithUser => res.json(reviewWithUser))
+  .catch(next)
 });
 
-router.get("/:productId", (req, res, next) => {
+router.get('/:productId', (req, res, next) => {
   Review.findAll({ where: { productId: req.params.productId } })
     .then(reviews => res.json(reviews))
     .catch(next);
@@ -34,5 +35,9 @@ router.delete('/:reviewId', (req,res,next) => {
 
 router.put('/:reviewId', (req, res, next) => {
   Review.findById(req.params.reviewId)
-  .then(review => review.update(req.body))
+  .then(review => review.update({
+    score: req.body.score,
+    date: req.body.date,
+    writtenReview: req.body.writtenReview,
+  }))
 })
