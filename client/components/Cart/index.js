@@ -6,13 +6,13 @@ import CartItem from './CartItem'
 //map half the cart items to one column and the other half to the other
 function Cart(props){
   return (
-    <div className="container">
-      <br /><br />
+    <div className="container scrollable">
+      <br />
       <h1 className="header center mainColor-text">Cart</h1>
-      <br /><br />
-      <div className="row">
+      <br />
+      <div className="row noBottomMargin">
         <div className="col s12 m6">
-          <ul className="collection">
+          <ul className="collection noBottomMargin noTopMargin">
             {
             props.cart.slice(0, Math.round(props.cart.length / 2)).map(pkg => (
             <CartItem pkg = {pkg} key = {pkg.id} />))
@@ -20,7 +20,7 @@ function Cart(props){
           </ul>
         </div>
         <div className="col s12 m6">
-          <ul className="collection">
+          <ul className="collection noTopMargin">
             {
             props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
             <CartItem pkg = {pkg} key = {pkg.id} />
@@ -29,20 +29,20 @@ function Cart(props){
           </ul>
         </div>
       </div>
-      <div className="row center">
-        <div className="col s12 m6">
-          <ul className="collapsible" data-collapsible="accordion">
-            <li>
-              <div className = "collapsible-header">FIRST</div>
-            </li>
-          </ul>
+      <div className = "row">
+        <div className = "col s6 m3 offset-m6">
+          <h5 className="inline">Total Cost: </h5>
+          <h5 className="light inline">
+            $
+            {
+            props.cart.reduce((sum, pkg) => (
+              sum + pkg.price
+            ), 0)
+            }
+          </h5>
         </div>
-        <div className="col s12 m6">
-          <ul className="collapsible" data-collapsible="accordion">
-            <li>
-              <div className = "collapsible-header">SECOND</div>
-            </li>
-          </ul>
+        <div className = "col s6 m3">
+          <button className="right btn">Checkout</button>
         </div>
       </div>
     </div>
