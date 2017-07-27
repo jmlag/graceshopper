@@ -30,7 +30,7 @@ export function deleteCartItem(packageId){
 export function addCartItem(pkg){
   return function thunk(dispatch){
     axios.put('/api/cart', pkg)
-    .then(dispatch(getCartItem(pkg)))
+    .then(() => dispatch(getCartItem(pkg)))
     .catch(err => console.log(err))
   }
 }
