@@ -4,7 +4,7 @@ const { Subscription } = require('../db/models');
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  Subscription.findAll({})
+  Subscription.findAll()
   .then(subscriptions => res.json(subscriptions))
   .catch(next);
 })
@@ -29,7 +29,10 @@ router.get('/:id', function(req, res, next){
 })
 
 router.put('/:id', function(req, res, next){
-  req.subscription.update(req.body)
+  req.subscription.update({
+    renewDay: req.body.renewDay,
+    cost: req.body.cost,
+  })
   .then(subscription => res.status(200).json(subscription))
   .catch(next)
 })
@@ -41,8 +44,10 @@ router.delete('/:id', function(req, res, next){
 })
 
 router.post('/', function(req, res, next){
-  const subscription = Subscription.build(req.body)
-  subscription.save()
-  .then(subscription => res.json(subscription))
+  Subscription.create({
+    renewDay: req.body.renewDay,
+    cost: req.body.cost,
+  })
+  .then(savedSub => res.json(savedSub))
   .catch(next);
 })

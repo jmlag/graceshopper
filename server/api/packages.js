@@ -3,7 +3,7 @@ const {Package} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Package.findAll({})
+  Package.findAll()
    .then(packages => res.json(packages))
    .catch(next);
 })
@@ -16,7 +16,6 @@ router.param('packageId', (req, res, next, packageId) => {
       err.status = 404
       throw err
     }
-
     req.pkg = pkg
     next()
   })
@@ -28,19 +27,29 @@ router.get('/:packageId', (req, res, next) => {
 })
 
 router.put('/:packageId', (req, res, next) => {
-  req.pkg.update(req.body)
-  .then(result => res.status(201).json(result))
+  req.pkg.update({
+    name: req.body.name,
+    image: req.body.image,
+    price: req.body.price,
+    description: req.body.description,
+  })
+  .then(putPackage => res.status(201).json(putPackage))
   .catch(next);
 })
 
-router.delete("/:packageId", (req, res, next) => {
-  req.pkg.destroy({})
-  .then( result => res.sendStatus(204))
+router.delete('/:packageId', (req, res, next) => {
+  req.pkg.destroy()
+  .then(() => res.sendStatus(204))
   .catch(next);
 })
 
 router.post('/', (req, res, next) => {
-  Package.create(req.body)
-  .then(pkg => res.json(pkg))
+  Package.create({
+    name: req.body.name,
+    image: req.body.image,
+    price: req.body.price,
+    description: req.body.description,
+  })
+  .then(pkg => res.status(201).json(pkg))
   .catch(next);
 })

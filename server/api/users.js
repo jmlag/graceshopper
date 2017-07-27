@@ -45,7 +45,8 @@ router.delete('/:userId', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  User.create(req.body)
+  const {email, password} = req.body
+  User.create({email, password})
   .then(user => res.json(user))
   .catch(next);
 })
