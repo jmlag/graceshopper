@@ -21,6 +21,7 @@ export const postPackage = function(pkg){
 export const putPackage = function(pkg){
   return function thunk(dispatch){
     axios.put(`/api/packages/${pkg.id}`, pkg)
+    .then(res => res.data)
     .then(putPkg => dispatch(updatePackage(putPkg)))
     .catch(err => console.log(err))
   }
@@ -29,6 +30,7 @@ export const putPackage = function(pkg){
 export const destroyPackage = function(pkg){
   return function thunk(dispatch){
     axios.delete(`/api/packages/${pkg.id}`)
+    .then(res => res.data)
     .then(() => dispatch(deletePackage(pkg)))
     .catch(err => console.log(err))
   }
@@ -37,6 +39,7 @@ export const destroyPackage = function(pkg){
 export const getPackages = function(){
   return function thunk(dispatch){
     axios.get('/api/packages')
+    .then(res => res.data)
     .then(packages => dispatch(readPackages(packages)))
     .catch(err => console.log(err))
   }
