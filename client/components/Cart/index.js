@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 
 import CartItem from './CartItem'
 
-import { deleteCartItem } from '../../store'
-
 //map half the cart items to one column and the other half to the other
 function Cart(props){
   return (
