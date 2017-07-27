@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import CartItem from './CartItem'
+
 //map half the cart items to one column and the other half to the other
 function Cart(props){
   return (
@@ -13,15 +15,15 @@ function Cart(props){
           <ul className="collection">
             {
             props.cart.slice(0, Math.round(props.cart.length / 2)).map(pkg => (
-            <li key={pkg.id} className="collection-item avatar">
-              <img src = {pkg.image} className="circle" />
-              <span className="collection-title">{pkg.name}</span>
-              <p>
-                ${pkg.price}
-              </p>
-            </li>))
+            <CartItem pkg = {pkg} key = {pkg.id} />))
+            }
+          </ul>
+        </div>
+        <div className="col s12 m6">
+          <ul className="collection">
+            {
             props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
-
+            <CartItem pkg = {pkg} key = {pkg.id} />
             ))
             }
           </ul>
@@ -51,29 +53,35 @@ function mapStateToProps(state) {
   return {
     // cart: state.cart,
     cart: [{
+      id: 1,
       name: "SHIRT",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
       price: 100,
     },{
+      id: 2,
       name: "SHIRT",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
+      price: 101,
     },{
+      id: 3,
       name: "SHIRT",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
+      price: 102,
     },{
+      id: 4,
       name: "SHIRT",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
+      price: 103,
     },{
+      id: 5,
       name: "SHIRT",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
+      price: 104,
     },{
+      id: 6,
       name: "SHIRT",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
+      price: 105,
     },]
   }
 }
