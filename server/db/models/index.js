@@ -12,7 +12,7 @@ const CartItem = require('./cartItem')
  *    BlogPost.belongsTo(User)
  */
 
-Package.belongsToMany(OrderHistory, {through: 'OrderHistoryPackage'})
+CartItem.belongsToMany(OrderHistory, {through: 'OrderHistoryCartItem'})
 
 Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
 
