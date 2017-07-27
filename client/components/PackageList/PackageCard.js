@@ -18,7 +18,7 @@ function PackageCard(props){
         </div>
         <div className="card-action">
           <button
-          className="btn"
+          className="btn tertiaryColor"
           onClick={() => props.addToCart(pkg.id)}
           >
             Add to Cart
