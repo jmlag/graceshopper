@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addCartItem } from '../../store'
+import { putCart } from '../../store'
 
 function PackageCard(props){
   const pkg = props.pkg
@@ -19,7 +19,7 @@ function PackageCard(props){
         <div className="card-action">
           <button
           className="btn tertiaryColor"
-          onClick={() => props.addToCart(pkg.id)}
+          onClick={() => props.addToCart(pkg)}
           >
             Add to Cart
           </button>
@@ -36,8 +36,8 @@ function mapStateToProps(state, oldProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addToCart(id){
-      dispatch(addCartItem(id))
+    addToCart(pkg){
+      dispatch(putCart(pkg))
     }
   }
 }
