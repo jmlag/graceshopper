@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
 import {Login, Signup, PackageList, Product, Cart, LandingPage, Navbar} from './components';
-import {me, getPackages, fetchCart } from './store';
+import {me, getPackages,  } from './store';
 
 
 /**
