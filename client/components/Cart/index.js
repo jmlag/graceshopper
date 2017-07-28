@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import CartItem from './CartItem'
 
@@ -42,7 +43,9 @@ function Cart(props){
             </h5>
           </div>
           <div className = "col s6 m3">
-            <button className="right btn tertiaryColor waves-effect">Checkout</button>
+            <Link to="/checkout">
+              <button className="right btn tertiaryColor waves-effect">Checkout</button>
+            </Link>
           </div>
         </div>
       </div>

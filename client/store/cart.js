@@ -12,6 +12,7 @@ const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
 export function getCart(){
   return function thunk(dispatch){
+    console.log('getcart')
     axios.get(`/api/cart/`)
     .then(res => res.data)
     .then(cart => dispatch(readCart(cart)))
