@@ -7,7 +7,7 @@ const CartItem = db.define('cartItem', {
         allowNull: false,
         min: 1,
     },
-    subscription: {
+    renewDay: {
         type: Sequelize.DATE,
         defaultValue: null
     }

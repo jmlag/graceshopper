@@ -7,7 +7,7 @@ const HistoryItem = db.define('historyItem', {
         allowNull: false,
         min: 1,
     },    
-    subscription: {
+    renewDay: {
         type: Sequelize.DATE,
         defaultValue: null
     },
