@@ -33,7 +33,7 @@ router.put('/', (req, res, next) => {
     defaults: {
       quantity: 0,
     }})
-  .spread((cartItem, created) => cartItem.increment('quantity'))
+  .spread((cartItem) => cartItem.increment('quantity'))
   .then(updatedCartItem  => res.json(updatedCartItem))
   .catch(next)
 })
@@ -45,7 +45,6 @@ router.delete('/', (req, res, next) => {
 })
 
 router.put('/:packageId', (req, res, next) => {
-  console.log('router.put', req.cart.id, req.params.packageId)
   CartItem.findOne({
     where: {
       cartId: req.cart.id,
@@ -54,7 +53,6 @@ router.put('/:packageId', (req, res, next) => {
   })
   .then(cartItem => {
     if (cartItem){
-      console.log('quantity', req.body)
       return cartItem.update({
         quantity: req.body.quantity,
       })
@@ -71,10 +69,11 @@ router.put('/:packageId', (req, res, next) => {
 router.delete('/:packageId', (req, res, next) => {
   CartItem.findOne({
     where: {
+      cartId: req.cart.id,
       packageId: req.params.packageId,
     }
   })
-  .then(cartItem => req.cart.removeCartItem(cartItem))
+  .then(cartItem => cartItem.destroy())
   .then(res.sendStatus(204))
   .catch(next)
 })

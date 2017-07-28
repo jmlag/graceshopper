@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch, oldProps) {
       const newQuantity = evt.target.quantity.value
       if (!newQuantity && newQuantity !== 0) {
         return
-      } else if (newQuantity === 0) {
+      } else if (+newQuantity === 0) {
         dispatch(destroyCartItem(oldProps.pkg.id))
       } else {
         dispatch(putCartQuantity(oldProps.pkg, newQuantity))
