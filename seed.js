@@ -19,17 +19,17 @@ const users = [
 ];
 
 const packages = [
-  { name: "Internet 10", 
-    imageUrl: "http://www.drodd.com/images15/1-7.jpg", 
-    price: 13.99, 
+  { name: "Internet 10",
+    imageUrl: "http://www.drodd.com/images15/1-7.jpg",
+    price: 13.99,
     description: "Browse, stay connected to the world, or keep in touch with family or friends." },
-  { name: "Internet 11", 
-    imageUrl: "http://www.drodd.com/images15/2-23.jpg", 
-    price: 111.99, 
+  { name: "Internet 11",
+    imageUrl: "http://www.drodd.com/images15/2-23.jpg",
+    price: 111.99,
     description: "Our Internet goes to 11." },
-  { name: "Internet 1000", 
-    imageUrl: "http://www.drodd.com/images15/3-12.jpg", 
-    price: 500.99, 
+  { name: "Internet 1000",
+    imageUrl: "http://www.drodd.com/images15/3-12.jpg",
+    price: 500.99,
     description: "*not actually 1Gbps." }
 ];
 
@@ -51,15 +51,15 @@ const seed = () => (
     User.create(user))
   )
   .then(() =>
-  Promise.all(packages.map(package =>
-    Package.create(package))
+  Promise.all(packages.map(pkg =>
+    Package.create(pkg))
   ))
   .then(() =>
   Promise.all(reviews.map(review =>
     Review.create(review))
   ))
   .then(() => {
-    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]); 
+    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
   })
   .spread( (reviews, usr1, usr3, usr5) => {
     return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);//associate reviews with user
@@ -73,7 +73,7 @@ const seed = () => (
     //associate reviews with package
   } )
   .then(() => {
-    return Promise.all([Cart.create(), Cart.create(), Cart.create()]); 
+    return Promise.all([Cart.create(), Cart.create(), Cart.create()]);
   })
   .then(carts => {
     return Promise.all([carts, User.findById(2), User.findById(4), User.findById(6) ])
