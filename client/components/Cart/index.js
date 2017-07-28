@@ -13,7 +13,7 @@ function Cart(props){
         <h1 className="header center mainColor-text">Cart</h1>
         <div className="row noBottomMargin">
           <div className="col s12 m6">
-            <ul className="collection noBottomMargin noTopMargin">
+            <ul className="collection noBottomMargin noTopMargin allowOverflow">
               {
               props.cart.slice(0, Math.round(props.cart.length / 2)).map(pkg => (
               <CartItem pkg = {pkg} key = {pkg.id} />))
@@ -21,7 +21,7 @@ function Cart(props){
             </ul>
           </div>
           <div className="col s12 m6">
-            <ul className="collection noTopMargin">
+            <ul className="collection noTopMargin allowOverflow">
               {
               props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
               <CartItem pkg = {pkg} key = {pkg.id} />
@@ -37,7 +37,7 @@ function Cart(props){
               $
               {
               props.cart.reduce((sum, pkg) => (
-                sum + pkg.price
+                sum + pkg.price * pkg.quantity
               ), 0)
               }
             </h5>
@@ -55,38 +55,13 @@ function Cart(props){
 
 function mapStateToProps(state) {
   return {
-    // cart: state.cart,
-    cart: [{
-      id: 1,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
-    },{
-      id: 2,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 101,
-    },{
-      id: 3,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 102,
-    },{
-      id: 4,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 103,
-    },{
-      id: 5,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 104,
-    },{
-      id: 6,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 105,
-    },]
+    cartObj: state.cart,
+    cart: state.cart.map(cartItem => {
+      let out = state.packages[cartItem.packageId]
+      out.quantity = cartItem.quantity
+      out.edit = false
+      return out
+    })
   }
 }
 
