@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { Cart, CartItem } = require('../db/models')
+const { Cart, CartItem, Package } = require('../db/models')
 module.exports = router
 
 router.use((req, res, next) => {
@@ -15,7 +15,12 @@ router.use((req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-  res.status(200).json(req.cart)
+  CartItem.findAll({
+    where: {
+      cartId: req.cart.id,
+    },
+  })
+  .then(cartItems => res.json(cartItems))
 })
 
 //req.body should be a package.
@@ -23,9 +28,9 @@ router.put('/', (req, res, next) => {
   CartItem.create({
     quantity: 1,
     cartId: req.cart.id,
+    packageId: req.body.id
   })
   .then(cartItem => {
-    cartItem.setPackage(req.body.id)
     res.json(req.cart)
   })
   .catch(next)

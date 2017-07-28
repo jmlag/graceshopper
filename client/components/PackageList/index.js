@@ -10,7 +10,7 @@ function PackageList (props) {
         <h1 className = "header center mainColor-text">Packages</h1>
         <div className="row">
           {
-            props.packages.map(pkg => (
+            Object.values(props.packages).map(pkg => (
               <PackageCard key={pkg.id} pkg={pkg} />
             ))
           }

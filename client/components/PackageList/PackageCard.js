@@ -10,7 +10,7 @@ function PackageCard(props){
       <div className="card">
         <NavLink to={`/packages/${pkg.id}`}>
           <div className="card-image">
-            <img className="responsive-img" src={pkg.image} />
+            <img className="responsive-img" src={pkg.imageUrl} />
           </div>
         </NavLink>
         <div className="card-content">

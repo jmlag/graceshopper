@@ -45,17 +45,21 @@ export const getPackages = function(){
   }
 }
 
-export default function packageReducer(state = [], action) {
+export default function packageReducer(state = {}, action) {
+  let out = Object.assign({}, state)
   switch (action.type){
     case CREATE_PACKAGE:
-      return [...state, action.pkg]
+      out[action.pkg.id] = action.pkg
+      break
     case READ_PACKAGES:
-      return action.pkgs
+      action.pkgs.forEach(pkg => out[pkg.id] = pkg)
+      break
     case DELETE_PACKAGE:
-      return [...state.filter(pkg => pkg.id !== action.pkg.id)]
+      delete out[action.pkg.id]
+      break
     case UPDATE_PACKAGE:
-      return state.map(pkg => pkg.id === action.pkg.id ? action.pkg : pkg)
-    default:
-      return state
+      out[action.pkg.id] = action.pkg
+      break
   }
+  return out
 }
