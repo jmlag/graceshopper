@@ -56,37 +56,9 @@ function Cart(props){
 function mapStateToProps(state) {
   return {
     // cart: state.cart,
-    cart: [{
-      id: 1,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 100,
-    },{
-      id: 2,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 101,
-    },{
-      id: 3,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 102,
-    },{
-      id: 4,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 103,
-    },{
-      id: 5,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 104,
-    },{
-      id: 6,
-      name: "SHIRT",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Jeans_for_men.jpg",
-      price: 105,
-    },]
+    cart: state.cart.map(cartItem => (
+      state.packages[cartItem.packageId]
+    ))
   }
 }
 

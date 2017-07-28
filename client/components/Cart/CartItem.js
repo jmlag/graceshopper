@@ -8,7 +8,7 @@ function CartItem(props){
 
   return (
     <li key={pkg.id} className="collection-item avatar">
-      <img src = {pkg.image} className="circle" />
+      <img src = {pkg.imageUrl} className="circle" />
       <span className="collection-title collection-title-heavy">{pkg.name}</span>
       <p>
         ${pkg.price}
