@@ -6,6 +6,7 @@ const OrderHistory = require("./server/db/models/orderHistory");
 const Cart = require("./server/db/models/cart");
 const CartItem = require("./server/db/models/cartItem");
 const Promise = require("bluebird");
+const axios = require('axios');
 
 const users = [
   { email: "jdoe@email.com", password: "user1", isAdmin: false },
@@ -84,7 +85,23 @@ const seed = () => (
       }))
     })
   // .then(e => console.log("=============", e))
-  .then(() => console.log("set association"))
+  // to seed db with orderHistory, make a post request with an object like this
+    // {
+    //   "userId": 1,
+    //   "cartItems": [
+    //     {
+    //       "packageId": 1,
+    //       "quantity": 2,
+    //       "price": 1000
+    //     },
+    //     {
+    //       "packageId": 2,
+    //       "quantity": 1,
+    //       "price": 2000,
+    //       "renewDay": "Fri Jul 28 2017 15:14:43 GMT-0500 (Central Standard Time)"
+    //     }
+    //   ]
+    // } 
   .catch(console.error)
 );
 
