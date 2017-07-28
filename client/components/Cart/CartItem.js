@@ -41,7 +41,7 @@ class CartItem extends Component{
             </i>
           </a>
         </div>
-        {this.state.showEdit && <EditCart pkg={pkg} quantity={pkg.quantity} />}
+        {this.state.showEdit && <EditCart isLoggedIn={this.props.isLoggedIn} pkg={pkg} quantity={pkg.quantity} />}
       </li>
     )
   }
@@ -51,6 +51,7 @@ function mapStateToProps(state, oldProps){
   return {
     pkg: oldProps.pkg,
     cart: state.cart,
+    isLoggedIn: oldProps.isLoggedIn,
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { putCartQuantity, destroyCartItem } from '../../store'
+import { putCartQuantity, destroyCartItem, deleteCartItem, updateTempCartQuantity } from '../../store'
 
 function EditCart(props){
   return (
@@ -35,9 +35,17 @@ function mapDispatchToProps(dispatch, oldProps) {
       if (!newQuantity && newQuantity !== 0) {
         return
       } else if (+newQuantity === 0) {
-        dispatch(destroyCartItem(oldProps.pkg.id))
+        if(oldProps.isLoggedIn){
+          dispatch(destroyCartItem(oldProps.pkg.id))
+        } else {
+          dispatch(deleteCartItem(oldProps.pkg.id))
+        }
       } else {
-        dispatch(putCartQuantity(oldProps.pkg, newQuantity))
+        if (oldProps.isLoggedIn){
+          dispatch(putCartQuantity(oldProps.pkg, newQuantity))
+        } else {
+          dispatch(updateTempCartQuantity(oldProps.pkg, newQuantity))
+        }
       }
     }
   }

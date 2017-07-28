@@ -3,12 +3,14 @@ import axios from 'axios'
 const READ_CART = 'READ_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const UPDATE_TEMP_CART = 'UPDATE_TEMP_CART'
+const UPDATE_TEMP_CART_QUANTITY = 'UPDATE_TEMP_CART_QUANTITY'
 const DELETE_CART = 'DELETE_CART'
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 
 const readCart = cart => ({type: READ_CART, cart})
 const updateCart = cartItem => ({type: UPDATE_CART, cartItem})
 export const updateTempCart = pkg => ({type: UPDATE_TEMP_CART, pkg})
+export const updateTempCartQuantity = (pkg, quantity) => ({type: UPDATE_TEMP_CART_QUANTITY, pkg, quantity})
 const deleteCart = () => ({type: DELETE_CART})
 export const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
@@ -74,6 +76,17 @@ export default function cartReducer(state = [], action){
         return [...state.filter(item => item.packageId !== action.pkg.id), out]
       }
     }
+    case UPDATE_TEMP_CART_QUANTITY:
+      return [...state.map(cartItem => (
+        cartItem.packageId === action.pkg.id ? (
+          {
+            packageId: action.pkg.id,
+            quantity: action.quantity,
+          }
+        ) : (
+          cartItem
+        )
+      ))]
     case DELETE_CART_ITEM:
       return [...state.filter(item => item.packageId !== action.id)]
     case DELETE_CART:

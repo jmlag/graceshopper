@@ -12,23 +12,28 @@ function Cart(props){
         <br /><br />
         <h1 className="header center mainColor-text">Cart</h1>
         <div className="row noBottomMargin">
-          <div className="col s12 m6">
-            <ul className="collection noBottomMargin noTopMargin allowOverflow">
-              {
-              props.cart.slice(0, Math.round(props.cart.length / 2)).map(pkg => (
-              <CartItem pkg = {pkg} key = {pkg.id} />))
-              }
-            </ul>
-          </div>
-          <div className="col s12 m6">
-            <ul className="collection noTopMargin allowOverflow">
-              {
-              props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
-              <CartItem isLoggedIn={props.isLoggedIn} pkg = {pkg} key = {pkg.id} />
-              ))
-              }
-            </ul>
-          </div>
+          {
+            props.cart.length !== 0 && (
+            <div className="col s12 m6">
+              <ul className="collection noBottomMargin noTopMargin allowOverflow">
+                {
+                props.cart.slice(0, Math.round(props.cart.length / 2)).map(pkg => (
+                <CartItem pkg = {pkg} key = {pkg.id} />))
+                }
+              </ul>
+            </div>)
+          }
+          {
+            (props.cart.length > 1) && (<div className="col s12 m6">
+              <ul className="collection noTopMargin allowOverflow">
+                {
+                props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
+                <CartItem isLoggedIn={props.isLoggedIn} pkg = {pkg} key = {pkg.id} />
+                ))
+                }
+              </ul>
+            </div>)
+          }
         </div>
         <div className = "row">
           <div className = "col s6 m3 offset-m6">
