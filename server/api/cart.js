@@ -25,14 +25,16 @@ router.get('/', (req, res, next) => {
 
 //req.body should be a package.
 router.put('/', (req, res, next) => {
-  CartItem.create({
-    quantity: 1,
-    cartId: req.cart.id,
-    packageId: req.body.id
-  })
-  .then(cartItem => {
-    res.json(cartItem)
-  })
+  CartItem.findOrCreate({
+    where: {
+      cartId: req.cart.id,
+      packageId: req.body.id,
+    },
+    defaults: {
+      quantity: 0,
+    }})
+  .spread((cartItem, created) => cartItem.increment('quantity'))
+  .then(updatedCartItem  => res.json(updatedCartItem))
   .catch(next)
 })
 
