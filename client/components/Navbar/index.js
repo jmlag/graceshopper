@@ -19,7 +19,7 @@ function Nav (props) {
       }
 
       {
-        !props.loggedIn? (
+        !props.loggedIn ? (
           <NavItem to="/login">Login</NavItem>
         ) : (
           <li>

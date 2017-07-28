@@ -11,7 +11,7 @@ const readCart = cart => ({type: READ_CART, cart})
 const updateCart = cartItem => ({type: UPDATE_CART, cartItem})
 export const updateTempCart = pkg => ({type: UPDATE_TEMP_CART, pkg})
 export const updateTempCartQuantity = (pkg, quantity) => ({type: UPDATE_TEMP_CART_QUANTITY, pkg, quantity})
-const deleteCart = () => ({type: DELETE_CART})
+export const deleteCart = () => ({type: DELETE_CART})
 export const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
 export function getCart(){
