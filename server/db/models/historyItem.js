@@ -10,7 +10,7 @@ const HistoryItem = db.define('historyItem', {
     subscription: {
         type: Sequelize.DATE,
         defaultValue: null
-    }
+    },
     totalPrice: {
         type: Sequelize.INTEGER,
         allowNull: false,
