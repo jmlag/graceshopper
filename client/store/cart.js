@@ -60,7 +60,7 @@ export default function cartReducer(state = [], action){
     case UPDATE_CART:
       return [...state.filter(item => item.packageId !== action.cartItem.packageId), action.cartItem]
     case DELETE_CART_ITEM:
-      return [...state.filter(item => item.packageId !== action.packageId)]
+      return [...state.filter(item => item.packageId !== action.id)]
     case DELETE_CART:
       return []
     default:
