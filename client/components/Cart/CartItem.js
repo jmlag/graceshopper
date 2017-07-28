@@ -12,6 +12,8 @@ function CartItem(props){
       <span className="collection-title collection-title-heavy">{pkg.name}</span>
       <p>
         ${pkg.price}
+        <br />
+        {pkg.quantity} in cart
       </p>
       <a className="secondary-content clickable" onClick = {() => props.delCartItem(pkg.id)}>
         <i className="material-icons secondaryColor-text">

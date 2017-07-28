@@ -25,6 +25,7 @@ function Cart(props){
               {
               props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
               <CartItem pkg = {pkg} key = {pkg.id} />
+
               ))
               }
             </ul>
@@ -56,9 +57,12 @@ function Cart(props){
 function mapStateToProps(state) {
   return {
     // cart: state.cart,
-    cart: state.cart.map(cartItem => (
-      state.packages[cartItem.packageId]
-    ))
+    cartItems: state.cart,
+    cart: state.cart.map(cartItem => {
+      let out = state.packages[cartItem.packageId]
+      out.quantity = cartItem.quantity
+      return out
+    })
   }
 }
 
