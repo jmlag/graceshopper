@@ -12,7 +12,6 @@ const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
 export function getCart(){
   return function thunk(dispatch){
-    console.log('getcart')
     axios.get(`/api/cart/`)
     .then(res => res.data)
     .then(cart => dispatch(readCart(cart)))
@@ -30,7 +29,6 @@ export function destroyCartItem(packageId){
 
 export function putCartQuantity(pkg, quantity){
   return function thunk(dispatch){
-    console.log('PUT CART QUANITYT', quantity)
     axios.put(`/api/cart/${pkg.id}`, {quantity: quantity})
     .then(res => res.data)
     .then(cartItem => dispatch(updateCart(cartItem)))
@@ -62,7 +60,7 @@ export default function cartReducer(state = [], action){
     case UPDATE_CART:
       return [...state.filter(item => item.packageId !== action.cartItem.packageId), action.cartItem]
     case DELETE_CART_ITEM:
-      return [...state.filter(item => item.id !== state.id)]
+      return [...state.filter(item => item.packageId !== action.packageId)]
     case DELETE_CART:
       return []
     default:
