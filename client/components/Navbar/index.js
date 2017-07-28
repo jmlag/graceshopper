@@ -11,6 +11,14 @@ function Nav (props) {
       <NavItem exact to="/" index={true}>Home</NavItem>
       <NavItem to="/packages">Packages</NavItem>
       {
+        props.cart.length ? (
+          <NavItem to="/cart">Cart {props.cart.length}</NavItem>
+        ) : (
+          <NavItem to="/cart">Cart</NavItem>
+        )
+      }
+
+      {
         !props.loggedIn? (
           <NavItem to="/login">Login</NavItem>
         ) : (
@@ -22,7 +30,11 @@ function Nav (props) {
     </Navbar>
   )
 }
-const mapToState = null;
+const mapToState = function(state) {
+  return {
+    cart: state.cart,
+  }
+}
 const mapToDispatch = {logout}
 
 export default connect(mapToState,mapToDispatch)(Nav)

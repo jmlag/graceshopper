@@ -5,11 +5,12 @@ const Package = db.define('package', {
   name: {
     type: Sequelize.STRING,
   },
-  image: {
+  imageUrl: {
     type: Sequelize.STRING,
+    defaultValue: "/images/products/placeholder.jpg"
   },
   price: {
-    type: Sequelize.DOUBLE,
+    type: Sequelize.INTEGER,
   },
   description: {
     type: Sequelize.TEXT,

@@ -12,13 +12,12 @@ const CartItem = require('./cartItem')
  *    BlogPost.belongsTo(User)
  */
 
-CartItem.belongsToMany(OrderHistory, {through: 'OrderHistoryCartItem'})
+// CartItem.belongsToMany(OrderHistory, {through: 'OrderHistoryCartItem'})
 
 Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
 
 Cart.belongsTo(User)
-Package.belongsToMany(CartItem, {through: 'CartItemPackage'})
-CartItem.hasOne(Package)
+Package.belongsToMany(Cart, {through: 'cartItem'})
 Cart.hasMany(CartItem)
 
 OrderHistory.belongsTo(User)

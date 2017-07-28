@@ -4,8 +4,8 @@ module.exports = router
 
 router.get('/', (req, res, next) => {
   Package.findAll()
-   .then(packages => res.json(packages))
-   .catch(next);
+  .then(packages => res.json(packages))
+  .catch(next);
 })
 
 router.param('packageId', (req, res, next, packageId) => {

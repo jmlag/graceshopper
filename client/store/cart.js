@@ -1,57 +1,57 @@
 import axios from 'axios'
 
-const GET_CART_FROM_SERVER = 'GET_CART_FROM_SERVER'
-const GET_CART_ITEM = 'GET_CART_ITEM'
-const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
-const EMPTY_CART = 'EMPTY_CART'
+const READ_CART = 'READ_CART'
+const UPDATE_CART = 'UPDATE_CART'
+const DELETE_CART = 'DELETE_CART'
+const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 
-const getCartFromServer = cart => ({type: GET_CART_FROM_SERVER, cart, })
-const getCartItem = item => ({type: GET_CART_ITEM, item, })
-const removeCartItem = id => ({type: REMOVE_CART_ITEM, id, })
-const emptyCart = () => ({type: EMPTY_CART, })
+const readCart = cart => ({type: READ_CART, cart})
+const updateCart = item => ({type: UPDATE_CART, item})
+const deleteCart = () => ({type: DELETE_CART})
+const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
-export function fetchCart(userId){
+export function getCart(){
   return function thunk(dispatch){
     axios.get(`/api/cart/`)
     .then(res => res.data)
-    .then(cart => dispatch(getCartFromServer(cart)))
+    .then(cart => dispatch(readCart(cart)))
     .catch(err => console.log(err))
   }
 }
 
-export function deleteCartItem(packageId){
+export function destroyCartItem(packageId){
   return function thunk(dispatch){
     axios.delete(`/api/cart/${packageId}`)
-    .then(() => dispatch(removeCartItem(packageId)))
+    .then(() => dispatch(deleteCartItem(packageId)))
     .catch(err => console.log(err))
   }
 }
 
-export function addCartItem(pkg){
+export function putCart(pkg){
   return function thunk(dispatch){
     axios.put('/api/cart', pkg)
-    .then(dispatch(getCartItem(pkg)))
+    .then(() => dispatch(updateCart(pkg)))
     .catch(err => console.log(err))
   }
 }
 
-export function deleteCart(){
+export function destroyCart(){
   return function thunk(dispatch){
     axios.delete('/api/cart')
-    .then(dispatch(emptyCart()))
+    .then(dispatch(deleteCart()))
     .catch(err => console.log(err))
   }
 }
 
 export default function cartReducer(state = [], action){
   switch (action.type){
-    case GET_CART_FROM_SERVER:
+    case READ_CART:
       return action.cart
-    case GET_CART_ITEM:
+    case UPDATE_CART:
       return [...state, action.item]
-    case REMOVE_CART_ITEM:
+    case DELETE_CART_ITEM:
       return [...state.filter(item => item.id !== state.id)]
-    case EMPTY_CART:
+    case DELETE_CART:
       return []
     default:
       return state

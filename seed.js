@@ -5,6 +5,7 @@ const Review = require("./server/db/models/review");
 const OrderHistory = require("./server/db/models/orderHistory");
 const Subscription = require("./server/db/models/subscription");
 const Cart = require("./server/db/models/cart");
+const CartItem = require("./server/db/models/cartItem");
 const Promise = require("bluebird");
 
 const users = [
@@ -20,15 +21,15 @@ const users = [
 
 const packages = [
   { name: "Internet 10", 
-    image: "http://www.drodd.com/images15/1-7.jpg", 
+    imageUrl: "http://www.drodd.com/images15/1-7.jpg", 
     price: 13.99, 
     description: "Browse, stay connected to the world, or keep in touch with family or friends." },
   { name: "Internet 11", 
-    image: "http://www.drodd.com/images15/2-23.jpg", 
+    imageUrl: "http://www.drodd.com/images15/2-23.jpg", 
     price: 111.99, 
     description: "Our Internet goes to 11." },
   { name: "Internet 1000", 
-    image: "http://www.drodd.com/images15/3-12.jpg", 
+    imageUrl: "http://www.drodd.com/images15/3-12.jpg", 
     price: 500.99, 
     description: "*not actually 1Gbps." }
 ];
@@ -36,37 +37,37 @@ const packages = [
 const reviews = [
   {  score: 1,
       date: Date.now(),
-      writtenReview: "This internet package ruined my life, I would give it 0 stars if I could!!!!" },
+      content: "This internet package ruined my life, I would give it 0 stars if I could!!!!" },
   {  score: 5,
       date: Date.now(),
-      writtenReview: "Bought it for my girlfirend and she hasn't complained." },
+      content: "Bought it for my girlfirend and she hasn't complained." },
   {  score: 3,
       date: Date.now(),
-      writtenReview: "it's ok" },
+      content: "it's ok" },
 ];
 
 const orderHistories = [
   { date: Date("October 13, 2014 11:13:00"),
-    cost: 13.99 },
+    cost: 1399 },
   { date: Date("May 29, 2016 23:19:29"),
-    cost: 111.99 },
+    cost: 11199 },
   { date: Date("December 25, 2017 16:43:55"),
-    cost: 80.99 },
+    cost: 8099 },
   { date: Date("October 13, 2010 11:13:00"),
-    cost: 14.95 },
+    cost: 1495 },
   { date: Date("May 29, 2010 23:19:29"),
-    cost: 112.95 },
+    cost: 11295 },
   { date: Date("December 25, 2010 16:43:55"),
-    cost: 81.95 },
+    cost: 8195 },
 ];
 
 const subscriptions = [
   { renewDay: 13,
-    cost: 13.99 },
+    cost: 1399 },
   { renewDay: 13,
-    cost: 14.95 },
+    cost: 1495 },
   { renewDay: 29,
-    cost: 112.95 },
+    cost: 11295 },
 ];
 
 const seed = () => (
@@ -90,10 +91,10 @@ const seed = () => (
     Subscription.create(subscription)
   )))
   .then(() => {
-    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
+    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]); 
   })
   .spread( (reviews, usr1, usr3, usr5) => {
-    return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);
+    return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);//associate reviews with user
   })
   .then( reviews => {
     return Promise.all( [...reviews, Package.findAll() ] );
@@ -101,9 +102,21 @@ const seed = () => (
   })
   .then( arr => {
     return Promise.all( arr[3].map( (pkg, i) => arr[i].setPackage(pkg) ))
+    //associate reviews with package
   } )
+  .then(() => {
+    return Promise.all([Cart.create(), Cart.create(), Cart.create()]); 
+  })
+  .then(carts => {
+    return Promise.all([carts, User.findById(2), User.findById(4), User.findById(6) ])
+  })
+  .then( arr => {
+    return Promise.all(arr[0].map((cart,index) => {
+        return cart.setUser(arr[index+1]);
+      }))
+    })
   // .then(e => console.log("=============", e))
-  // .then(() => console.log("set association"))
+  .then(() => console.log("set association"))
   .catch(console.error)
 );
 

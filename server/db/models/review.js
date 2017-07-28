@@ -9,12 +9,9 @@ const Review = db.define('review', {
       max: 5,
     },
   },
-  date: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW,
-  },
-  writtenReview: {
+  content: {
     type: Sequelize.TEXT,
+    len: [10, 2500],
   }
 })
 
