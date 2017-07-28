@@ -11,7 +11,7 @@ function PackageList (props) {
         <div className="row">
           {
             Object.values(props.packages).map(pkg => (
-              <PackageCard key={pkg.id} pkg={pkg} />
+              <PackageCard isLoggedIn={props.isLoggedIn} key={pkg.id} pkg={pkg} />
             ))
           }
         </div>
@@ -23,6 +23,7 @@ function PackageList (props) {
 const mapStateToProps = function (state, ownProps) {
   return {
     packages: state.packages,
+    isLoggedIn: !!state.user.id,
   };
 };
 

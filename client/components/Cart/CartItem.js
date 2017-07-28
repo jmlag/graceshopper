@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { destroyCartItem } from '../../store'
+import { destroyCartItem, deleteCartItem } from '../../store'
 
 import EditCart from './EditCart'
 
@@ -57,7 +57,11 @@ function mapStateToProps(state, oldProps){
 function mapDispatchToProps(dispatch, oldProps){
   return {
     deleteFromCart(){
-      dispatch(destroyCartItem(oldProps.pkg.id))
+      if (oldProps.isLoggedIn){
+        dispatch(destroyCartItem(oldProps.pkg.id))
+      } else {
+        dispatch(deleteCartItem(oldProps.pkg.id))
+      }
     },
   }
 }

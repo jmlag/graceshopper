@@ -24,7 +24,7 @@ function Cart(props){
             <ul className="collection noTopMargin allowOverflow">
               {
               props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
-              <CartItem pkg = {pkg} key = {pkg.id} />
+              <CartItem isLoggedIn={props.isLoggedIn} pkg = {pkg} key = {pkg.id} />
               ))
               }
             </ul>
@@ -61,7 +61,8 @@ function mapStateToProps(state) {
       out.quantity = cartItem.quantity
       out.edit = false
       return out
-    })
+    }),
+    isLoggedIn: !!state.user.id,
   }
 }
 
