@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { deleteCartItem } from '../../store'
+import { destroyCartItem } from '../../store'
 
-import { Dropdown, Button, NavItem } from 'react-materialize'
 import EditCart from './EditCart'
 
 class CartItem extends Component{
@@ -36,9 +35,11 @@ class CartItem extends Component{
               edit
             </i>
           </a>
-          <i className="material-icons secondaryColor-text">
-            delete
-          </i>
+          <a onClick={this.props.deleteFromCart}>
+            <i className="material-icons secondaryColor-text clickable">
+              delete
+            </i>
+          </a>
         </div>
         {this.state.showEdit && <EditCart pkg={pkg} quantity={pkg.quantity} />}
       </li>
@@ -53,11 +54,11 @@ function mapStateToProps(state, oldProps){
   }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch, oldProps){
   return {
-    delCartItem(packageId){
-      dispatch(deleteCartItem(packageId))
-    }
+    deleteFromCart(){
+      dispatch(destroyCartItem(oldProps.pkg.id))
+    },
   }
 }
 

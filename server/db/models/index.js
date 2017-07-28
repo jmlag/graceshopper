@@ -4,7 +4,6 @@ const OrderHistory = require('./orderHistory')
 const HistoryItem = require('./historyItem')
 const Package = require('./package')
 const Review = require('./review')
-const Subscription = require('./subscription')
 const User = require('./user')
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -37,7 +36,6 @@ module.exports = {
   OrderHistory,
   HistoryItem,
   Package,
-  Subscription,
   User,
   Review,
 }
