@@ -3,7 +3,6 @@ const User = require('./server/db/models/user');
 const Package = require('./server/db/models/package');
 const Review = require("./server/db/models/review");
 const OrderHistory = require("./server/db/models/orderHistory");
-const Subscription = require("./server/db/models/subscription");
 const Cart = require("./server/db/models/cart");
 const CartItem = require("./server/db/models/cartItem");
 const Promise = require("bluebird");

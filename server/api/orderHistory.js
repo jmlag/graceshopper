@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { OrderHistory, Package } = require('../db/models')
+const { OrderHistory, Package, HistoryItem, CartItem } = require('../db/models')
+const Promise = require('bluebird')
 
 module.exports = router
 
@@ -45,10 +46,19 @@ router.delete('/:id', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  OrderHistory.create({
-    date: req.body.date,
-    cost: req.body.cost,
-  })
+  const userId = req.body.userId;
+  const cartItems = req.body.cartItems;
+
+  OrderHistory.create({userId})
+  .then(history => Promise.map(cartItems, (cartItem, index) => {
+    return HistoryItem.create({
+      orderHistoryId: history.id,
+      quantity: cartItem.quantity,
+      packageId: cartItem.packageId,
+      renewDay: cartItem.renewDay,
+      totalPrice: cartItem.quantity * cartItem.price
+    });
+  }))
   .then(order => res.json(order))
   .catch(next)
 })
