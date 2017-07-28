@@ -28,6 +28,7 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res =>{
         if(res.data) {
+          console.log('/me res.data exists')
           dispatch(getCart())
         }
         return dispatch(getUser(res.data || defaultUser))
