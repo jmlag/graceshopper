@@ -20,9 +20,6 @@ Cart.hasMany(CartItem)
 Package.belongsToMany(OrderHistory, {through: 'historyItem'})
 OrderHistory.belongsTo(User)
 
-Subscription.hasOne(HistoryItem)
-HistoryItem.hasOne(Subscription)
-
 Review.belongsTo(User)
 User.hasMany(Review)
 
