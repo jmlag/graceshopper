@@ -7,7 +7,7 @@ const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 
 const readCart = cart => ({type: READ_CART, cart})
 const updateCart = cartItem => ({type: UPDATE_CART, cartItem})
-const deleteCart = () => ({type: DELETE_CART})
+export const deleteCart = () => ({type: DELETE_CART})
 const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
 export function getCart(){
