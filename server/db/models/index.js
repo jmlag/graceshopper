@@ -5,6 +5,7 @@ const Review = require('./review')
 const Subscription = require('./subscription')
 const User = require('./user')
 const CartItem = require('./cartItem')
+const HistoryItem = require('./historyItem')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
