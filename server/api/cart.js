@@ -44,8 +44,37 @@ router.delete('/', (req, res, next) => {
   .catch(next)
 })
 
+router.put('/:packageId', (req, res, next) => {
+  console.log('router.put', req.cart.id, req.params.packageId)
+  CartItem.findOne({
+    where: {
+      cartId: req.cart.id,
+      packageId: req.params.packageId,
+    },
+  })
+  .then(cartItem => {
+    if (cartItem){
+      console.log('quantity', req.body)
+      return cartItem.update({
+        quantity: req.body.quantity,
+      })
+      .then(updatedCartItem => {
+        res.json(updatedCartItem)
+      })
+    } else {
+      res.sendStatus(404)
+    }
+  })
+  .catch(next)
+})
+
 router.delete('/:packageId', (req, res, next) => {
-  req.cart.removePackage(req.params.packageId)
+  CartItem.findOne({
+    where: {
+      packageId: req.params.packageId,
+    }
+  })
+  .then(cartItem => req.cart.removeCartItem(cartItem))
   .then(res.sendStatus(204))
   .catch(next)
 })

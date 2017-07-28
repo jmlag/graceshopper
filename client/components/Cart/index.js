@@ -13,7 +13,7 @@ function Cart(props){
         <h1 className="header center mainColor-text">Cart</h1>
         <div className="row noBottomMargin">
           <div className="col s12 m6">
-            <ul className="collection noBottomMargin noTopMargin">
+            <ul className="collection noBottomMargin noTopMargin allowOverflow">
               {
               props.cart.slice(0, Math.round(props.cart.length / 2)).map(pkg => (
               <CartItem pkg = {pkg} key = {pkg.id} />))
@@ -21,7 +21,7 @@ function Cart(props){
             </ul>
           </div>
           <div className="col s12 m6">
-            <ul className="collection noTopMargin">
+            <ul className="collection noTopMargin allowOverflow">
               {
               props.cart.slice(Math.round(props.cart.length / 2)).map(pkg => (
               <CartItem pkg = {pkg} key = {pkg.id} />
@@ -55,9 +55,11 @@ function Cart(props){
 
 function mapStateToProps(state) {
   return {
+    cartObj: state.cart,
     cart: state.cart.map(cartItem => {
       let out = state.packages[cartItem.packageId]
       out.quantity = cartItem.quantity
+      out.edit = false
       return out
     })
   }

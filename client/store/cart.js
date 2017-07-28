@@ -28,6 +28,16 @@ export function destroyCartItem(packageId){
   }
 }
 
+export function putCartQuantity(pkg, quantity){
+  return function thunk(dispatch){
+    console.log('PUT CART QUANITYT', quantity)
+    axios.put(`/api/cart/${pkg.id}`, {quantity: quantity})
+    .then(res => res.data)
+    .then(cartItem => dispatch(updateCart(cartItem)))
+    .catch(err => console.log(err))
+  }
+}
+
 export function putCart(pkg){
   return function thunk(dispatch){
     axios.put('/api/cart', pkg)
