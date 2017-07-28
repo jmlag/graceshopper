@@ -46,29 +46,6 @@ const reviews = [
       content: "it's ok" },
 ];
 
-const orderHistories = [
-  { date: Date("October 13, 2014 11:13:00"),
-    cost: 1399 },
-  { date: Date("May 29, 2016 23:19:29"),
-    cost: 11199 },
-  { date: Date("December 25, 2017 16:43:55"),
-    cost: 8099 },
-  { date: Date("October 13, 2010 11:13:00"),
-    cost: 1495 },
-  { date: Date("May 29, 2010 23:19:29"),
-    cost: 11295 },
-  { date: Date("December 25, 2010 16:43:55"),
-    cost: 8195 },
-];
-
-const subscriptions = [
-  { renewDay: 13,
-    cost: 1399 },
-  { renewDay: 13,
-    cost: 1495 },
-  { renewDay: 29,
-    cost: 11295 },
-];
 
 const seed = () => (
   Promise.all(users.map(user =>
@@ -82,14 +59,6 @@ const seed = () => (
   Promise.all(reviews.map(review =>
     Review.create(review))
   ))
-  .then(() =>
-  Promise.all(orderHistories.map(orderHistory =>
-    OrderHistory.create(orderHistory))
-  ))
-  .then(() =>
-  Promise.all(subscriptions.map(subscription=>
-    Subscription.create(subscription)
-  )))
   .then(() => {
     return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]); 
   })
