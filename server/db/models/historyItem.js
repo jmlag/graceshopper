@@ -10,7 +10,7 @@ const HistoryItem = db.define('historyItem', {
     totalPrice: {
         type: Sequelize.INTEGER,
         allowNull: false,
-    }
+    },
 })
 
 module.exports = HistoryItem;

@@ -15,15 +15,16 @@ const HistoryItem = require('./historyItem')
 
 // CartItem.belongsToMany(OrderHistory, {through: 'OrderHistoryCartItem'})
 
-Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
+// Subscription.belongsToMany(OrderHistory, {through: 'OrderHistorySubscription'})
 
 Cart.belongsTo(User)
 Package.belongsToMany(Cart, {through: 'cartItem'})
+Package.belongsToMany(OrderHistory, {through: 'historyItem'})
 Cart.hasMany(CartItem)
 
 OrderHistory.belongsTo(User)
 
-Subscription.belongsToMany(User, {through: 'UserSubscription'})
+//Subscription.belongsToMany(User, {through: 'UserSubscription'})
 
 Review.belongsTo(User)
 User.hasMany(Review)
