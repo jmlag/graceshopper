@@ -31,14 +31,24 @@ export default function Product(props) {
 
         <div className="col s6">
           <div className="product-description">
-            <span>Headphones</span>
+            <span>Product Category Placeholder</span>
             <h1>
               {product.name}
             </h1>
             <p>
-              The preferred choice of a vast range of acclaimed DJs. Punchy,
-              bass-focused sound and high isolation. Sturdy headband and on-ear
-              cushions suitable for live performance
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque aliquam facilisis augue, quis placerat lectus
+              bibendum a. Pellentesque vulputate, tortor eget aliquam congue,
+              libero ligula pharetra odio, non efficitur justo lorem at nunc.
+              Nunc nec neque nec turpis ornare vehicula sed venenatis mi. Cras
+              maximus scelerisque viverra. Aenean imperdiet eros eu urna
+              consectetur ultrices. Morbi in tincidunt nunc. In semper tristique
+              neque at hendrerit. Vestibulum lacinia turpis id convallis semper.
+              Donec scelerisque et quam ac venenatis. Mauris non pulvinar dolor.
+              Fusce placerat rhoncus tortor, sed finibus lectus facilisis in.
+              Etiam quis vestibulum sem. Nam et nisi sollicitudin nisi iaculis
+              dapibus. Nullam ornare dictum euismod. Vestibulum ante ipsum
+              primis in faucibus orci luctus et ultrices posuere cubilia Curae;
             </p>
           </div>
 

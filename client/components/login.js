@@ -86,11 +86,8 @@ class LoggingBox extends React.Component {
               <div className="form-group">
                 <button type="submit">Log In</button>
               </div>
-<<<<<<< HEAD
               <a href="/auth/google/"><img className="login-img" src="/login.png"/></a>
-=======
               <a href="/auth/google"><img className="login-img" src="/images/google-login.png"/></a>
->>>>>>> master
                  {error && error.response && <div> {error.response.data} </div>}
             </form>
           </div>
