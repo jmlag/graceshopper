@@ -6,6 +6,10 @@ const CartItem = db.define('cartItem', {
         type: Sequelize.INTEGER,
         allowNull: false,
         min: 1,
+    },
+    subscription: {
+        type: Sequelize.DATE,
+        defaultValue: null
     }
 })
 
