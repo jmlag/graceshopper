@@ -11,9 +11,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.param('id', (req, res, next, id) => {
-  OrderHistory.findById(id, {include: [{
-    model: Package,
-  }]})
+  OrderHistory.findById(id)
   .then(history => {
     if (!history) {
       const err = Error('OrderHistory not found.')
@@ -30,10 +28,19 @@ router.get('/:id', (req, res, next) => {
   res.json(req.orderHistory)
 })
 
+router.get('/:id/items', (req, res, next) => {
+  HistoryItem.findAll({
+    where: {orderHistoryId: req.params.id}
+  })
+  .then(items => res.json(items))
+  .catch(next)
+})
+
 router.put('/:id', (req, res, next) => {
   req.orderHistory.update({
-    date: req.body.date,
-    cost: req.body.cost,
+    quantity: req.body.quantity,
+    renewDay: req.body.renewDay,
+    totalPrice: req.body.totalPrice
   })
   .then(orderHistory => res.json(orderHistory))
   .catch(next)
