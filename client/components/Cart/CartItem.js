@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { destroyCartItem } from '../../store'
+import { destroyCartItem, deleteCartItem } from '../../store'
 
 import EditCart from './EditCart'
 
@@ -41,7 +41,7 @@ class CartItem extends Component{
             </i>
           </a>
         </div>
-        {this.state.showEdit && <EditCart pkg={pkg} quantity={pkg.quantity} />}
+        {this.state.showEdit && <EditCart isLoggedIn={this.props.isLoggedIn} pkg={pkg} quantity={pkg.quantity} />}
       </li>
     )
   }
@@ -51,13 +51,18 @@ function mapStateToProps(state, oldProps){
   return {
     pkg: oldProps.pkg,
     cart: state.cart,
+    isLoggedIn: oldProps.isLoggedIn,
   }
 }
 
 function mapDispatchToProps(dispatch, oldProps){
   return {
     deleteFromCart(){
-      dispatch(destroyCartItem(oldProps.pkg.id))
+      if (oldProps.isLoggedIn){
+        dispatch(destroyCartItem(oldProps.pkg.id))
+      } else {
+        dispatch(deleteCartItem(oldProps.pkg.id))
+      }
     },
   }
 }
