@@ -6,7 +6,7 @@ const DELETE_CART = 'DELETE_CART'
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 
 const readCart = cart => ({type: READ_CART, cart})
-const updateCart = item => ({type: UPDATE_CART, item})
+const updateCart = cartItem => ({type: UPDATE_CART, cartItem})
 const deleteCart = () => ({type: DELETE_CART})
 const deleteCartItem = id => ({type: DELETE_CART_ITEM, id})
 
@@ -31,7 +31,8 @@ export function destroyCartItem(packageId){
 export function putCart(pkg){
   return function thunk(dispatch){
     axios.put('/api/cart', pkg)
-    .then(() => dispatch(updateCart(pkg)))
+    .then(res => res.data)
+    .then(cartItem => dispatch(updateCart(cartItem)))
     .catch(err => console.log(err))
   }
 }
@@ -49,7 +50,7 @@ export default function cartReducer(state = [], action){
     case READ_CART:
       return action.cart
     case UPDATE_CART:
-      return [...state, action.item]
+      return [...state, action.cartItem]
     case DELETE_CART_ITEM:
       return [...state.filter(item => item.id !== state.id)]
     case DELETE_CART:

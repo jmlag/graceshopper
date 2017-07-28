@@ -31,7 +31,7 @@ router.put('/', (req, res, next) => {
     packageId: req.body.id
   })
   .then(cartItem => {
-    res.json(req.cart)
+    res.json(cartItem)
   })
   .catch(next)
 })
