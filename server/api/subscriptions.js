@@ -1,10 +1,16 @@
 const router = require('express').Router();
-const { Subscription } = require('../db/models');
+const { HistoryItem } = require('../db/models');
 
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  Subscription.findAll()
+  HistoryItem.findAll({
+    where: {
+      renewDay:{
+        $ne: null,
+      }
+    }
+  })
   .then(subscriptions => res.json(subscriptions))
   .catch(next);
 })
