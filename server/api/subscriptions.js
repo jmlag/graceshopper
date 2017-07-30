@@ -34,10 +34,12 @@ router.get('/:id', function(req, res, next){
   res.json(req.subscription);
 })
 
+/* USE ORDERHISTORY API INSTEAD
 router.put('/:id', function(req, res, next){
   req.subscription.update({
     renewDay: req.body.renewDay,
-    cost: req.body.cost,
+    quantity: req.body.quantity,
+    totalPrice: req.body.totalPrice,
   })
   .then(subscription => res.status(200).json(subscription))
   .catch(next)
@@ -52,8 +54,10 @@ router.delete('/:id', function(req, res, next){
 router.post('/', function(req, res, next){
   Subscription.create({
     renewDay: req.body.renewDay,
-    cost: req.body.cost,
+    quantity: req.body.quantity,
+    totalPrice: req.body.totalPrice,
   })
   .then(savedSub => res.json(savedSub))
   .catch(next);
 })
+*/
