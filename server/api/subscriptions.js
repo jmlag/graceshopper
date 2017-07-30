@@ -16,9 +16,9 @@ router.get('/', (req, res, next) => {
 })
 
 router.param('id', function(req, res, next, id) {
-  Subscription.findById(id)
+  HistoryItem.findById(id)
   .then(subscription => {
-    if(!subscription) {
+    if(!subscription.renewDay) {
       const err = Error('Subscription not found.');
       err.status = 404;
       throw err;
