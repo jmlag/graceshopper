@@ -3,8 +3,9 @@ const db = require('../db');
 
 const HistoryItem = db.define('historyItem', {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
     quantity: {
         type: Sequelize.INTEGER,

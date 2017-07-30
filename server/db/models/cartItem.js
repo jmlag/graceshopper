@@ -3,8 +3,9 @@ const db = require('../db');
 
 const CartItem = db.define('cartItem', {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
     quantity: {
         type: Sequelize.INTEGER,
