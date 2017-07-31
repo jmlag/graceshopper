@@ -15,7 +15,6 @@ class Reviews extends React.Component {
   }
 
   onSubmitHandler(e){
-<<<<<<< HEAD:client/components/ReviewBox.js
       e.preventDefault()
       console.log(e.target.comment.value)
       const content = e.target.comment.value;
@@ -24,9 +23,6 @@ class Reviews extends React.Component {
         content: content,
         packageId:1
       })
-=======
-    e.preventdefault()
->>>>>>> master:client/components/ReviewsList.js
   }
 
   starHandler(e){
@@ -75,12 +71,8 @@ class Reviews extends React.Component {
   }
 }
 
-<<<<<<< HEAD:client/components/ReviewBox.js
 
 const mapToState = null;
 const mapDispatch = {postReview};
 
 export default connect(mapToState, mapDispatch)(Reviews);
-=======
-export default Reviews;
->>>>>>> master:client/components/ReviewsList.js
