@@ -1,6 +1,5 @@
 import React from "react";
 import ReviewsList from "./ReviewsList";
-import { Link } from "react-router-dom";
 
 export default function Product(props) {
   const { product } = props;
@@ -80,6 +79,9 @@ export default function Product(props) {
           </div>
         </div>
       </div>
+
+    <ReviewsList />
+
     </div>
   );
 }

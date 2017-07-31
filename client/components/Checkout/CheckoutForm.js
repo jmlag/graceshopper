@@ -11,12 +11,11 @@ const componentForm = {
   postal_code: 'short_name'
 };
 
-
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { 
-      address: '', 
+    this.state = {
+      address: '',
       selected: false,
       street_number: '',
       route: '',
@@ -52,22 +51,22 @@ class CheckoutForm extends React.Component {
       placeholder: "Enter your address",
     }
 
-    const styles = {      
+    const styles = {
       autocompleteItemActive: { backgroundColor: 'cyan' }
     }
 
     return (
-      <form >        
+      <form>
         <Row>
           <Input s={3} label="First Name" />
           <Input s={3} label="Last Name" />
           <Input s={3} type="email" label="Email"  />
-          <Input s={3} label="Phone #"  />
+          <Input s={3} label="Phone #" />
         </Row>
-        <Row>    
+        <Row>
           <PlacesAutocomplete
             inputProps={inputProps}
-            onSelect={this.handleSelect} 
+            onSelect={this.handleSelect}
             highlightFirstSuggestion={true}
             styles={styles}
           />
@@ -82,7 +81,7 @@ class CheckoutForm extends React.Component {
             <Input s={3} label="Country" value={this.state.country} />
             <Input s={2} label="Zip/Postal Code" value={this.state.postal_code} />
             </Row>) : ""
-        }        
+        }
       </form>
     )
   }
