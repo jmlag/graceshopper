@@ -7,7 +7,7 @@ const Package = db.define('package', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: "/images/products/placeholder.jpg"
+    defaultValue: '/images/products/placeholder.jpg'
   },
   price: {
     type: Sequelize.INTEGER,

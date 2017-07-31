@@ -14,13 +14,12 @@ class Reviews extends React.Component {
   }
 
   onSubmitHandler(e){
-      e.preventdefault()
-
+    e.preventdefault()
   }
 
   starHandler(e){
     let rating = +e.target.attributes[0].nodeValue
-    this.setState({starToggle:rating})
+    this.setState({starToggle: rating})
   }
 
   render() {
@@ -54,7 +53,7 @@ class Reviews extends React.Component {
 
               </div>
             </form>
-          
+
           </div>
           </div>
         </div>
@@ -62,9 +61,5 @@ class Reviews extends React.Component {
     );
   }
 }
-
-
-const mapToState = null;
-const mapDispatch = null;
 
 export default Reviews;

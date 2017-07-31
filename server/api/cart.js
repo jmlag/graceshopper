@@ -1,13 +1,13 @@
 const router = require('express').Router()
 
-const { Cart, CartItem, Package } = require('../db/models')
+const { Cart, CartItem } = require('../db/models')
 module.exports = router
 
 router.use((req, res, next) => {
   Cart.findOrCreate({where: {
     userId: req.user.id,
   }})
-  .spread((cart, created) => {
+  .spread((cart) => {
     req.cart = cart
     next()
   })
@@ -23,7 +23,6 @@ router.get('/', (req, res, next) => {
   .then(cartItems => res.json(cartItems))
 })
 
-//req.body should be a package.
 router.put('/', (req, res, next) => {
   CartItem.findOrCreate({
     where: {

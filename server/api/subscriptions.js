@@ -6,7 +6,7 @@ module.exports = router;
 router.get('/', (req, res, next) => {
   HistoryItem.findAll({
     where: {
-      renewDay:{
+      renewDay: {
         $ne: null,
       }
     }
@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 router.param('id', function(req, res, next, id) {
   HistoryItem.findById(id)
   .then(subscription => {
-    if(!subscription.renewDay) {
+    if (!subscription.renewDay){
       const err = Error('Subscription not found.');
       err.status = 404;
       throw err;
@@ -33,31 +33,3 @@ router.param('id', function(req, res, next, id) {
 router.get('/:id', function(req, res, next){
   res.json(req.subscription);
 })
-
-/* USE ORDERHISTORY API INSTEAD
-router.put('/:id', function(req, res, next){
-  req.subscription.update({
-    renewDay: req.body.renewDay,
-    quantity: req.body.quantity,
-    totalPrice: req.body.totalPrice,
-  })
-  .then(subscription => res.status(200).json(subscription))
-  .catch(next)
-})
-
-router.delete('/:id', function(req, res, next){
-  req.subscription.destroy()
-  .then(res.sendStatus(204))
-  .catch(next);
-})
-
-router.post('/', function(req, res, next){
-  Subscription.create({
-    renewDay: req.body.renewDay,
-    quantity: req.body.quantity,
-    totalPrice: req.body.totalPrice,
-  })
-  .then(savedSub => res.json(savedSub))
-  .catch(next);
-})
-*/

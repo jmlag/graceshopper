@@ -18,11 +18,12 @@ class CartItem extends Component{
     e.preventDefault()
     this.setState({showEdit: !this.state.showEdit})
   }
+
   render(){
     const pkg = this.props.pkg
     return (
       <li key={pkg.id} className="collection-item avatar">
-        <img src = {pkg.imageUrl} className="circle" />
+        <img src={pkg.imageUrl} className="circle" />
         <span className="collection-title collection-title-heavy">{pkg.name}</span>
         <p>
           ${pkg.price}

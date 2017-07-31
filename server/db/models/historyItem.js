@@ -11,7 +11,7 @@ const HistoryItem = db.define('historyItem', {
         type: Sequelize.INTEGER,
         allowNull: false,
         min: 1,
-    },    
+    },
     renewDay: {
         type: Sequelize.DATE,
         defaultValue: null
