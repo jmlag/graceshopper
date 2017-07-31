@@ -1,34 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import CheckoutForm from './CheckoutForm'
 
-function Checkout(props){
+import CheckoutForm from './CheckoutForm'
+import CartList from '../Cart/CartList'
+
+export default function Checkout(props){
   return (
     <div className="section no-pad-bot">
       <div className="container">
         <br /><br />
         <h1 className="header center mainColor-text">Checkout</h1>
-        <div className="row noBottomMargin">
-          <div className="col s12 m6">
-            <ul className="collection">
-              {
-                props.cart.map(cartItem => (
-                  <div>a</div>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
+        <CartList />
+        <CheckoutForm />
       </div>
-      <CheckoutForm />
     </div>
   )
 }
-
-function mapStateToProps(state) {
-  return {
-    cart: state.cart,
-  }
-}
-
-export default connect(mapStateToProps)(Checkout)
