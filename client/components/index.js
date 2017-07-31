@@ -10,5 +10,6 @@ export { default as ReviewsList } from './ReviewsList'
 export { default as LandingPage } from './landingPage'
 export { default as Navbar } from './Navbar'
 export { default as Product } from './Product'
+export { default as Checkout } from './Checkout'
 export {default as Login} from './login'
 
