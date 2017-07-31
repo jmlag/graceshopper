@@ -17,6 +17,7 @@ Package.belongsToMany(Cart, {through: 'cartItem'})
 Cart.hasMany(CartItem)
 
 Package.belongsToMany(OrderHistory, {through: 'historyItem'})
+OrderHistory.belongsToMany(Package, {through: 'historyItem'})
 OrderHistory.belongsTo(User)
 
 Review.belongsTo(User)
