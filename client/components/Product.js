@@ -1,5 +1,5 @@
 import React from "react";
-import ReviewsList from "./ReviewsList";
+import ReviewBox from "./ReviewBox";
 import { Link } from "react-router-dom";
 
 export default function Product(props) {
@@ -81,7 +81,7 @@ export default function Product(props) {
         </div>
       </div>
 
-    <ReviewsList />
+    <ReviewBox packageId="1"/>
 
     </div>
   );
