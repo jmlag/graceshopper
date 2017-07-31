@@ -12,10 +12,10 @@ const deleteReview = review => ({ type: DELETE_REVIEW, review });
 
 export const postReview = function(review) {
   return function thunk(dispatch) {
-    console.log(review)
     axios
       .post(`/api/packages/${review.packageId}/reviews`, review)
-      .then(postedReview => dispatch(createReview(postedReview)))
+      .then(postedReview => {
+        dispatch(createReview(postedReview.data))})
       .catch(err => console.log(err));
   };
 };
@@ -40,22 +40,24 @@ export const destroyReview = function(review) {
   };
 };
 
-export const getReviews = function() {
+export const getReviews = function(packageId) {
+  console.log('this ran')
   return function thunk(dispatch) {
     axios
-      .get(`/api/packages/${packageId}`)
+      .get(`/api/packages/${packageId}/reviews`)
       .then(res => res.data)
-      .then(packages => dispatch(readReviews(packages)))
+      .then(reviews => dispatch(readReviews(reviews)))
       .catch(err => console.log(err));
   };
 };
 
 export default function reviewReducer(state = [], action) {
+
   switch (action.type) {
     case CREATE_REVIEW:
-      return [...state, ...action.review];
+      return [action.review, ...state];
     case READ_REVIEWS:
-      return [...actions.reviews];
+      return [...action.reviews];
     case UPDATE_REVIEW:
       return state.map(
         review => (action.review.id === review.id ? action.review : review)
