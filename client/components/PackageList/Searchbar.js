@@ -37,6 +37,12 @@ export default class Searchbar extends React.Component {
     });
   };
 
+  onBlur = (event, { highlightedSuggestion }) => {
+    this.setState({
+      value: highlightedSuggestion
+    });
+  }
+
   // Autosuggest will call this function every time you need to update suggestions.
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
@@ -57,7 +63,8 @@ export default class Searchbar extends React.Component {
     const inputProps = {
       placeholder: 'Search for a package',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      onBlur: this.onBlur
     };
 
     return (<div>
