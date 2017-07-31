@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 function CheckoutForm(props){
   return (
-    <form>
+    <form onSubmit={props.sendCheckout}>
       <div className="row">
         <div className="input-field col s12 m6">
           <input id="firstName" type="text" className="validate" />
@@ -62,11 +62,31 @@ function CheckoutForm(props){
 }
 
 function mapStoreToProps(store){
-  console.log(store)
   return {
     user: store.user,
   }
 }
 
+function mapDispatchToProps(dispatch){
+  return {
+    sendCheckout(evt){
+      evt.preventDefault()
+      const order = {
+        firstName: evt.target.firstName.value,
+        lastName: evt.target.lastName.value,
+        email: evt.target.email.value,
+        phone: evt.target.phone.value,
+        street: evt.target.street.value,
+        address: evt.target.address.value,
+        address2: evt.target.address2.value,
+        city: evt.target.city.value,
+        state: evt.target.state.value,
+        country: evt.target.country.value,
+        zip: evt.target.zip.value,
+      }
+    }
+  }
+}
 
-export default connect(mapStoreToProps)(CheckoutForm);
+
+export default connect(mapStoreToProps, mapDispatchToProps)(CheckoutForm);

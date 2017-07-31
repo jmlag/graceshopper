@@ -22,7 +22,6 @@ class Routes extends Component {
 
           <Route path = "/" render = {() => <Navbar loggedIn = {isLoggedIn} />} />
           <Switch>
-            {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
@@ -51,7 +50,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(getPackages())
-    }
+    },
   }
 }
 
