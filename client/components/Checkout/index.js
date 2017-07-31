@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-function Checkout(){
+function Checkout(props){
   return (
     <div className="section no-pad-bot">
       <div className="container">
