@@ -1,6 +1,10 @@
 import React from "react";
+<<<<<<< HEAD
 import ReviewBox from "./ReviewBox";
 import { Link } from "react-router-dom";
+=======
+import ReviewsList from "./ReviewsList";
+>>>>>>> master
 
 export default function Product(props) {
   const { product } = props;

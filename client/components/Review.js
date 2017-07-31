@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export default function Review(props) {
 
     const review = props.review; //||
-    const userName = props.userName || "USER NAME";
+    const userName = props.userName || 'USER NAME';
 
     return (
         <div>
@@ -11,7 +11,7 @@ export default function Review(props) {
             <h3> {userName} </h3>
             <p>Date: {review.date}</p>
             <p>
-                {review.writtenReview +" "+ review.productId}
+                {review.writtenReview + ' ' + review.productId}
             </p>
         </div>
     );

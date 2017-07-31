@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Review, Package, User } = require('../db/models');
+const { Review } = require('../db/models');
 module.exports = router;
 
 router.get('/', (req, res, next) => {
