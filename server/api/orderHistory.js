@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { OrderHistory, Package } = require('../db/models')
+const { OrderHistory, Package, HistoryItem, CartItem } = require('../db/models')
+const Promise = require('bluebird')
 
 module.exports = router
 
@@ -10,9 +11,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.param('id', (req, res, next, id) => {
-  OrderHistory.findById(id, {include: [{
-    model: Package,
-  }]})
+  OrderHistory.findById(id)
   .then(history => {
     if (!history) {
       const err = Error('OrderHistory not found.')
@@ -29,10 +28,19 @@ router.get('/:id', (req, res, next) => {
   res.json(req.orderHistory)
 })
 
+router.get('/:id/items', (req, res, next) => {
+  HistoryItem.findAll({
+    where: {orderHistoryId: req.params.id}
+  })
+  .then(items => res.json(items))
+  .catch(next)
+})
+
 router.put('/:id', (req, res, next) => {
   req.orderHistory.update({
-    date: req.body.date,
-    cost: req.body.cost,
+    quantity: req.body.quantity,
+    renewDay: req.body.renewDay,
+    totalPrice: req.body.totalPrice
   })
   .then(orderHistory => res.json(orderHistory))
   .catch(next)
@@ -45,10 +53,19 @@ router.delete('/:id', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  OrderHistory.create({
-    date: req.body.date,
-    cost: req.body.cost,
-  })
+  const userId = req.body.userId;
+  const cartItems = req.body.cartItems;
+
+  OrderHistory.create({userId})
+  .then(history => Promise.map(cartItems, (cartItem, index) => {
+    return HistoryItem.create({
+      orderHistoryId: history.id,
+      quantity: cartItem.quantity,
+      packageId: cartItem.packageId,
+      renewDay: cartItem.renewDay,
+      totalPrice: cartItem.quantity * cartItem.price
+    });
+  }))
   .then(order => res.json(order))
   .catch(next)
 })

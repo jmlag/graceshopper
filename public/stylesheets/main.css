@@ -40,6 +40,12 @@
 	font-size: inherit;
 }
 
+<<<<<<< HEAD
 .rating {
   
 }
+=======
+.dropdown-content li > a, .dropdown-content li > span {
+  color: inherit;
+}
+>>>>>>> master

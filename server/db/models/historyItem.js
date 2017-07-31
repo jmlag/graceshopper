@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const CartItem = db.define('cartItem', {
+const HistoryItem = db.define('historyItem', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,11 +11,15 @@ const CartItem = db.define('cartItem', {
         type: Sequelize.INTEGER,
         allowNull: false,
         min: 1,
-    },
+    },    
     renewDay: {
         type: Sequelize.DATE,
         defaultValue: null
-    }
+    },
+    totalPrice: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
 })
 
-module.exports = CartItem;
+module.exports = HistoryItem;

@@ -25,14 +25,16 @@ router.get('/', (req, res, next) => {
 
 //req.body should be a package.
 router.put('/', (req, res, next) => {
-  CartItem.create({
-    quantity: 1,
-    cartId: req.cart.id,
-    packageId: req.body.id
-  })
-  .then(cartItem => {
-    res.json(req.cart)
-  })
+  CartItem.findOrCreate({
+    where: {
+      cartId: req.cart.id,
+      packageId: req.body.id,
+    },
+    defaults: {
+      quantity: 0,
+    }})
+  .spread((cartItem) => cartItem.increment('quantity'))
+  .then(updatedCartItem  => res.json(updatedCartItem))
   .catch(next)
 })
 
@@ -42,8 +44,36 @@ router.delete('/', (req, res, next) => {
   .catch(next)
 })
 
+router.put('/:packageId', (req, res, next) => {
+  CartItem.findOne({
+    where: {
+      cartId: req.cart.id,
+      packageId: req.params.packageId,
+    },
+  })
+  .then(cartItem => {
+    if (cartItem){
+      return cartItem.update({
+        quantity: req.body.quantity,
+      })
+      .then(updatedCartItem => {
+        res.json(updatedCartItem)
+      })
+    } else {
+      res.sendStatus(404)
+    }
+  })
+  .catch(next)
+})
+
 router.delete('/:packageId', (req, res, next) => {
-  req.cart.removePackage(req.params.packageId)
+  CartItem.findOne({
+    where: {
+      cartId: req.cart.id,
+      packageId: req.params.packageId,
+    }
+  })
+  .then(cartItem => cartItem.destroy())
   .then(res.sendStatus(204))
   .catch(next)
 })

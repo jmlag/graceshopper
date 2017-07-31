@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { putCart } from '../../store'
+import { putCart, updateTempCart } from '../../store'
 
 function PackageCard(props){
   const pkg = props.pkg
@@ -34,10 +34,14 @@ function mapStateToProps(state, oldProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, oldProps) {
   return {
     addToCart(pkg){
-      dispatch(putCart(pkg))
+      if(oldProps.isLoggedIn){
+        dispatch(putCart(pkg))
+      } else {
+        dispatch(updateTempCart(pkg))
+      }
     }
   }
 }

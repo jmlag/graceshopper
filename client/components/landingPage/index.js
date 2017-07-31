@@ -2,6 +2,8 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import NetNeutrality from './NetNeutrality'
+
 const LandingPage = () => {
   return (
     <div className = "section no-pad-bot">
@@ -48,6 +50,7 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
+      <NetNeutrality />
     </div>
   )
 }

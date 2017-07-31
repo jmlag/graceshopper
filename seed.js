@@ -3,10 +3,10 @@ const User = require('./server/db/models/user');
 const Package = require('./server/db/models/package');
 const Review = require("./server/db/models/review");
 const OrderHistory = require("./server/db/models/orderHistory");
-const Subscription = require("./server/db/models/subscription");
 const Cart = require("./server/db/models/cart");
 const CartItem = require("./server/db/models/cartItem");
 const Promise = require("bluebird");
+const axios = require('axios');
 
 const users = [
   { email: "jdoe@email.com", password: "user1", isAdmin: false },
@@ -20,17 +20,17 @@ const users = [
 ];
 
 const packages = [
-  { name: "Internet 10", 
-    imageUrl: "http://www.drodd.com/images15/1-7.jpg", 
-    price: 13.99, 
+  { name: "Internet 10",
+    imageUrl: "http://www.drodd.com/images15/1-7.jpg",
+    price: 13.99,
     description: "Browse, stay connected to the world, or keep in touch with family or friends." },
-  { name: "Internet 11", 
-    imageUrl: "http://www.drodd.com/images15/2-23.jpg", 
-    price: 111.99, 
+  { name: "Internet 11",
+    imageUrl: "http://www.drodd.com/images15/2-23.jpg",
+    price: 111.99,
     description: "Our Internet goes to 11." },
-  { name: "Internet 1000", 
-    imageUrl: "http://www.drodd.com/images15/3-12.jpg", 
-    price: 500.99, 
+  { name: "Internet 1000",
+    imageUrl: "http://www.drodd.com/images15/3-12.jpg",
+    price: 500.99,
     description: "*not actually 1Gbps." }
 ];
 
@@ -46,52 +46,21 @@ const reviews = [
       content: "it's ok" },
 ];
 
-const orderHistories = [
-  { date: Date("October 13, 2014 11:13:00"),
-    cost: 1399 },
-  { date: Date("May 29, 2016 23:19:29"),
-    cost: 11199 },
-  { date: Date("December 25, 2017 16:43:55"),
-    cost: 8099 },
-  { date: Date("October 13, 2010 11:13:00"),
-    cost: 1495 },
-  { date: Date("May 29, 2010 23:19:29"),
-    cost: 11295 },
-  { date: Date("December 25, 2010 16:43:55"),
-    cost: 8195 },
-];
-
-const subscriptions = [
-  { renewDay: 13,
-    cost: 1399 },
-  { renewDay: 13,
-    cost: 1495 },
-  { renewDay: 29,
-    cost: 11295 },
-];
 
 const seed = () => (
   Promise.all(users.map(user =>
     User.create(user))
   )
   .then(() =>
-  Promise.all(packages.map(package =>
-    Package.create(package))
+  Promise.all(packages.map(pkg =>
+    Package.create(pkg))
   ))
   .then(() =>
   Promise.all(reviews.map(review =>
     Review.create(review))
   ))
-  .then(() =>
-  Promise.all(orderHistories.map(orderHistory =>
-    OrderHistory.create(orderHistory))
-  ))
-  .then(() =>
-  Promise.all(subscriptions.map(subscription=>
-    Subscription.create(subscription)
-  )))
   .then(() => {
-    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]); 
+    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
   })
   .spread( (reviews, usr1, usr3, usr5) => {
     return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);//associate reviews with user
@@ -105,7 +74,7 @@ const seed = () => (
     //associate reviews with package
   } )
   .then(() => {
-    return Promise.all([Cart.create(), Cart.create(), Cart.create()]); 
+    return Promise.all([Cart.create(), Cart.create(), Cart.create()]);
   })
   .then(carts => {
     return Promise.all([carts, User.findById(2), User.findById(4), User.findById(6) ])
@@ -116,7 +85,25 @@ const seed = () => (
       }))
     })
   // .then(e => console.log("=============", e))
-  .then(() => console.log("set association"))
+  // to seed db with orderHistory, make a post request with an object like this
+  /*
+    {
+      "userId": 1,
+      "cartItems": [
+        {
+          "packageId": 1,
+          "quantity": 2,
+          "price": 1000
+        },
+        {
+          "packageId": 2,
+          "quantity": 1,
+          "price": 2000,
+          "renewDay": "Fri Jul 28 2017 15:14:43 GMT-0500 (Central Standard Time)"
+        }
+      ]
+    } 
+    */
   .catch(console.error)
 );
 
