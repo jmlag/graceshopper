@@ -56,33 +56,58 @@ class CheckoutForm extends React.Component {
     }
 
     return (
-      <form>
-        <Row>
-          <Input s={3} label="First Name" />
-          <Input s={3} label="Last Name" />
-          <Input s={3} type="email" label="Email"  />
-          <Input s={3} label="Phone #" />
-        </Row>
-        <Row>
-          <PlacesAutocomplete
-            inputProps={inputProps}
-            onSelect={this.handleSelect}
-            highlightFirstSuggestion={true}
-            styles={styles}
-          />
-        </Row>
-        {
-          this.state.selected ? (<Row>
-            <Input s={1} label="Street #" value={this.state.street_number}/>
-            <Input s={11} label="Address" value={this.state.route} />
-            <Input s={12} label="Address 2" />
-            <Input s={4} label="City" value={this.state.locality} />
-            <Input s={3} label="State/Province" value={this.state.administrative_area_level_1} />
-            <Input s={3} label="Country" value={this.state.country} />
-            <Input s={2} label="Zip/Postal Code" value={this.state.postal_code} />
-            </Row>) : ""
-        }
-      </form>
+      <div className="container">
+        <form>
+          <div className="row">
+            <div className="input-field col s12 m6">
+              <input id="firstName" type="text" className="validate" />
+              <label>First Name</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="lastName" type="text" className="validate" />
+              <label>Last Name</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="email" type="email" className="validate" />
+              <label>Email</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="phone" type="tel" className="validate" />
+              <label>Phone #</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s4 m2">
+              <input id="street" type="number" className="validate" />
+              <label>Street #</label>
+            </div>
+            <div className="input-field col s8 m4">
+              <input id="address" type="text" className="validate" />
+              <label>Address</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="address2" type="text" className="validate" />
+              <label>Address 2</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="city" type="text" className="validate" />
+              <label>City</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="state" type="text" className="validate" />
+              <label>State/Providence</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="country" type="text" className="validate" />
+              <label>Country</label>
+            </div>
+            <div className="input-field col s12 m6">
+              <input id="zip" type="number" className="validate" />
+              <label>Zip Code</label>
+            </div>
+          </div>
+        </form>
+      </div>
     )
   }
 }
