@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Package} = require('../db/models')
+const {Package, Review} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -53,3 +53,24 @@ router.post('/', (req, res, next) => {
   .then(pkg => res.status(201).json(pkg))
   .catch(next);
 })
+
+
+//Review Routes
+router.post('/:packageId/reviews', (req, res, next) => {
+  Review.create({
+    score: req.body.score,
+    date: req.body.date,
+    writtenReview: req.body.writtenReview,
+  })
+  .then(review => {
+    review.setPackage(req.pkg)
+    review.setUser(req.user)})
+  .then(reviewWithUser => res.json(reviewWithUser))
+  .catch(next)
+});
+
+router.get('/:packageId/reviews', (req, res, next) => {
+  Review.findAll({where:{packageId: req.params.packageId}})
+  .then(reviews => res.json(reviews))
+  .catch(next);
+});
