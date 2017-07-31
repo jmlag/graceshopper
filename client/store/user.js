@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 
-import { getCart, deleteCart } from './index.js'
+import { getCart, deleteCart, getHistory, deleteHistory } from './index.js'
 
 /**
  * ACTION TYPES
@@ -23,12 +23,24 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
+const onLogin = dispatch => {
+  dispatch(getCart())
+  dispatch(getHistory())
+}
+
+const onLogout = dispatch => {
+  dispatch(removeUser())
+  dispatch(deleteCart())
+  dispatch(deleteHistory())
+  history.push('/login')
+}
+
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
-      .then(res =>{
-        if(res.data) {
-          dispatch(getCart())
+      .then(res => {
+        if (res.data){
+          onLogin(dispatch)
         }
         return dispatch(getUser(res.data || defaultUser))
       })
@@ -48,9 +60,7 @@ export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
       .then(res => {
-        dispatch(removeUser())
-        dispatch(deleteCart())
-        history.push('/login')
+        onLogout(dispatch)
       })
       .catch(err => console.log(err))
 
