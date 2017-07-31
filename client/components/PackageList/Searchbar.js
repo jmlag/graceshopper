@@ -1,5 +1,6 @@
 import Autosuggest from 'react-autosuggest'
 import React from 'react'
+import PackageCard from './PackageCard'
 
 const getSuggestions = (value, array) => {
   const inputValue = value.trim().toLowerCase();
@@ -21,10 +22,12 @@ const renderSuggestion = suggestion => (
 export default class Searchbar extends React.Component {
   constructor(props) {
     super(props);    
+    
+    this.packages = Object.values(props.packages)
 
     this.state = {
       value: '',
-      suggestions: Object.values(props.packages).map(pkg => pkg),
+      suggestions: this.packages.map(pkg => pkg),
     };
   }
 
@@ -37,7 +40,7 @@ export default class Searchbar extends React.Component {
   // Autosuggest will call this function every time you need to update suggestions.
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value, this.state.suggestions)
+      suggestions: getSuggestions(value, this.packages)
     });
   };
 
@@ -57,7 +60,7 @@ export default class Searchbar extends React.Component {
       onChange: this.onChange
     };
 
-    return (
+    return (<div>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -66,6 +69,11 @@ export default class Searchbar extends React.Component {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
       />
-    );
+      {
+        Object.values(this.props.packages).map(pkg => (
+              <PackageCard isLoggedIn={this.props.isLoggedIn} key={pkg.id} pkg={pkg} />
+            ))
+      }
+    </div>);
   }
 }
