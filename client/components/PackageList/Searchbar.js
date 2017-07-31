@@ -3,15 +3,15 @@ import React from 'react'
 import PackageCard from './PackageCard'
 
 const getSuggestions = (value, array) => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+  const inputValue = (value || '').trim().toLowerCase();
+  const inputLength = inputValue.length || 0;
 
   return inputLength === 0 ? [] : array.filter(pkg =>
     pkg.name.toLowerCase().slice(0, inputLength) === inputValue
   ).map(pkg => pkg.name);
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion;
 
 const renderSuggestion = suggestion => (
   <div>
@@ -30,6 +30,15 @@ export default class Searchbar extends React.Component {
       suggestions: this.packages.map(pkg => pkg.name),
     };
   }
+
+  onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+    Promise.resolve(suggestion)
+    .then(s => this.setState({
+      value: s
+    }))
+    .then(() => console.log(this.state.value, "state.value"))
+    .catch(console.error)
+  };
 
   onChange = (event, { newValue }) => {
     this.setState({
@@ -72,6 +81,7 @@ export default class Searchbar extends React.Component {
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected={this.onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
