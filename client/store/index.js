@@ -7,12 +7,14 @@ import user from './user'
 import packages from './package'
 import cart from './cart'
 import orderHistory from './orderHistory'
+import review from './review'
 
 const reducer = combineReducers({
   user,
   packages,
   cart,
   orderHistory,
+  review,
 })
 
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
@@ -23,3 +25,4 @@ export * from './user'
 export * from './package'
 export * from './cart'
 export * from './orderHistory'
+export * from './review'
