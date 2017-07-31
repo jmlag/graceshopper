@@ -1,34 +1,17 @@
 import Autosuggest from 'react-autosuggest'
 import React from 'react'
 
-// Imagine you have a list of languages that you'd like to autosuggest.
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-];
-
-// Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value, array) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  return inputLength === 0 ? [] : array.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+  return inputLength === 0 ? [] : array.filter(pkg =>
+    pkg.name.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
 
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
 const getSuggestionValue = suggestion => suggestion.name;
 
-// Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
     {suggestion.name}
@@ -37,12 +20,12 @@ const renderSuggestion = suggestion => (
 
 export default class Searchbar extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
+
     this.state = {
       value: '',
-      suggestions: Object.values(props.packages),
+      suggestions: Object.values(props.packages).map(pkg => pkg),
     };
-    console.log(this.state, "-=-=-=-=-=-=-=");
   }
 
   onChange = (event, { newValue }) => {
@@ -52,10 +35,9 @@ export default class Searchbar extends React.Component {
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value, languages)
+      suggestions: getSuggestions(value, this.state.suggestions)
     });
   };
 
@@ -69,14 +51,12 @@ export default class Searchbar extends React.Component {
   render() {
     const { value, suggestions } = this.state;
 
-    // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Search for a package',
       value,
       onChange: this.onChange
     };
 
-    // Finally, render it!
     return (
       <Autosuggest
         suggestions={suggestions}
