@@ -9,6 +9,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.param('packageId', (req, res, next, packageId) => {
+  console.log(packageId)
   Package.findById(packageId)
   .then(pkg => {
     if (!pkg){
@@ -56,21 +57,28 @@ router.post('/', (req, res, next) => {
 
 
 //Review Routes
+
+
+router.get('/:packageId/reviews', (req, res, next) => {
+  Review.findAll({where:{packageId: req.params.packageId}})
+  .then(reviews => {
+    res.json(reviews)})
+  .catch(next);
+});
+
 router.post('/:packageId/reviews', (req, res, next) => {
   Review.create({
     score: req.body.score,
     date: req.body.date,
-    writtenReview: req.body.writtenReview,
+    content: req.body.content,
   })
   .then(review => {
     review.setPackage(req.pkg)
-    review.setUser(req.user)})
+    review.setUser(req.user)
+    return review
+  })
   .then(reviewWithUser => res.json(reviewWithUser))
   .catch(next)
 });
 
-router.get('/:packageId/reviews', (req, res, next) => {
-  Review.findAll({where:{packageId: req.params.packageId}})
-  .then(reviews => res.json(reviews))
-  .catch(next);
-});
+

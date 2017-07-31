@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Review from './Review';
+import Review from './Reviewlist';
 import { postReview } from '../store'
 
 class Reviews extends React.Component {
@@ -16,12 +16,11 @@ class Reviews extends React.Component {
 
   onSubmitHandler(e){
       e.preventDefault()
-      console.log(e.target.comment.value)
       const content = e.target.comment.value;
       this.props.postReview({
         score:this.state.starToggle,
         content: content,
-        packageId:1
+        packageId:this.props.packageId
       })
   }
 
