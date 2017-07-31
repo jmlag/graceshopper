@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import CheckoutForm from './CheckoutForm'
 
 function Checkout(props){
   return (
@@ -19,6 +20,7 @@ function Checkout(props){
           </div>
         </div>
       </div>
+      <CheckoutForm />
     </div>
   )
 }
