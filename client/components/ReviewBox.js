@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Review from './Review';
+import { postReview } from '../store'
 
 class Reviews extends React.Component {
   constructor() {
@@ -14,10 +15,18 @@ class Reviews extends React.Component {
   }
 
   onSubmitHandler(e){
-    e.preventdefault()
+      e.preventDefault()
+      console.log(e.target.comment.value)
+      const content = e.target.comment.value;
+      this.props.postReview({
+        score:this.state.starToggle,
+        content: content,
+        packageId:1
+      })
   }
 
   starHandler(e){
+    e.preventDefault()
     let rating = +e.target.attributes[0].nodeValue
     this.setState({starToggle: rating})
   }
@@ -28,7 +37,7 @@ class Reviews extends React.Component {
         <div className="row" id="post-review-box">
           <div className="col s6">
           <div className="card-panel">
-            <form>
+            <form onSubmit={e => this.onSubmitHandler(e)}>
               <input id="ratings-hidden" name="rating" type="hidden" />
               <textarea
                 className="form-control"
@@ -62,4 +71,8 @@ class Reviews extends React.Component {
   }
 }
 
-export default Reviews;
+
+const mapToState = null;
+const mapDispatch = {postReview};
+
+export default connect(mapToState, mapDispatch)(Reviews);

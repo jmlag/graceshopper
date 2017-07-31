@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const CREATE_PACKAGE = 'CREATE_PACKAGE'
 const READ_PACKAGES = 'READ_PACKAGES'
+const READ_PACKAGE = 'READ_PACKAGE'
 const UPDATE_PACKAGE = 'UPDATE_PACKAGE'
 const DELETE_PACKAGE = 'DELETE_PACKAGE'
 
@@ -45,6 +46,7 @@ export const getPackages = function(){
   }
 }
 
+//{packageId: package{id, price, imageUrl...}}   props.packages[packageId] -> returns the package u want
 export default function packageReducer(state = {}, action) {
   let out = Object.assign({}, state)
   switch (action.type){

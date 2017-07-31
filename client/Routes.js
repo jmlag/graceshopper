@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
 import {Login, Signup, PackageList, Product, Cart, LandingPage, Navbar, Checkout} from './components';
-import {me, getPackages,  } from './store';
+import {me, getPackages} from './store';
 
 class Routes extends Component {
 
@@ -29,17 +29,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/packages" component={PackageList} />
-            <Route exact path="/packages/:productId" render={(props) => (
-              <Product
-                product={{
-                  name: 'prod' + props.match.params.productId,
-                  image: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-                  price: '123456',
-                  description: 'product' + props.match.params.productId + 'description',
-                }}
-                productId={props.match.params.productId}
-              />)}
-            />
+            <Route exact path="/packages/:productId" component={Product} />
             <Route component={LandingPage} />
           </Switch>
         </div>
