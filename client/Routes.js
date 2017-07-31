@@ -4,7 +4,7 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import {Login, Signup, PackageList, Product, Cart, LandingPage, Navbar, Checkout} from './components';
+import {Login, Signup, PackageList, Product, Cart, LandingPage, Navbar, Checkout, Profile} from './components';
 import {me, getPackages,  } from './store';
 
 
@@ -43,6 +43,7 @@ class Routes extends Component {
                 productId={props.match.params.productId}
               />)}
             />
+            <Route path="/profile" component={Profile} />
             <Route component={LandingPage} />
           </Switch>
         </div>
