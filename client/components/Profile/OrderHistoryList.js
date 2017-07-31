@@ -1,39 +1,19 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getHistory } from '../../store'
+import React from 'react'
 
 import OrderHistory from './OrderHistory'
 
-class OrderHistoryList extends Component {
-  componentDidMount(){
-    this.props.loadInitalData()
-  }
-
-  render(){
-    const orderHistory = this.props.orderHistory
-    return (
-      <ul className="collection">
-        {
-          orderHistory.map(order => (
-            <OrderHistory order={order} />
-          ))
-        }
-      </ul>
-    )
-  }
+export default function OrderHistoryList(props) {
+  const orders = props.orders
+  console.log(orders)
+  return (
+    <ul className="collection with-header">
+      <li className="collection-header"><h4>{orders.createdAt.substring(0,10)}</h4></li>
+      {
+        orders.packages.map(order => <OrderHistory key={order.id} order={order} />)
+      }
+      <li className="collection-item">
+        ${orders.packages.reduce(((sum, order) => sum + order.price),0)}
+      </li>
+    </ul>
+  )
 }
-
-function mapStateToProps(state){
-  return {
-    orderHistory: state.orderHistory,
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return {
-    loadInitalData(){
-      dispatch(getHistory())
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(OrderHistoryList)
