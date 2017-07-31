@@ -20,15 +20,11 @@ function PackageList (props) {
   );
 }
 
-const mapStateToProps = function (state, ownProps) {
+const mapStateToProps = function (state) {
   return {
     packages: state.packages,
     isLoggedIn: !!state.user.id,
   };
 };
 
-const mapDispatchToProps = function (dispatch) {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PackageList);
+export default connect(mapStateToProps)(PackageList);

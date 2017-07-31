@@ -3,7 +3,7 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export { default as Main } from './Main'
+
 export { default as PackageList } from './PackageList'
 export { default as Cart } from './Cart'
 export { default as ReviewsList } from './ReviewsList'
