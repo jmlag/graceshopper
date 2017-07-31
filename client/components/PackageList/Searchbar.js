@@ -8,14 +8,14 @@ const getSuggestions = (value, array) => {
 
   return inputLength === 0 ? [] : array.filter(pkg =>
     pkg.name.toLowerCase().slice(0, inputLength) === inputValue
-  );
+  ).map(pkg => pkg.name);
 };
 
 const getSuggestionValue = suggestion => suggestion.name;
 
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.name}
+    {suggestion}
   </div>
 );
 
@@ -27,7 +27,7 @@ export default class Searchbar extends React.Component {
 
     this.state = {
       value: '',
-      suggestions: this.packages.map(pkg => pkg),
+      suggestions: this.packages.map(pkg => pkg.name),
     };
   }
 
@@ -70,7 +70,11 @@ export default class Searchbar extends React.Component {
         inputProps={inputProps}
       />
       {
-        Object.values(this.props.packages).map(pkg => (
+        Object.values(this.props.packages)
+         .filter(pkg => {
+          return !this.state.value || this.state.suggestions.includes(pkg.name);
+        }) 
+        .map(pkg => (
               <PackageCard isLoggedIn={this.props.isLoggedIn} key={pkg.id} pkg={pkg} />
             ))
       }
