@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
 import {Login, Signup, PackageList, Product, Cart, LandingPage, Navbar, Checkout, Profile} from './components';
-import {me, getPackages,  } from './store';
+import {me, getPackages} from './store';
 
 
 /**
@@ -68,7 +68,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(getPackages())
-      // dispatch(fetchCart())  TODO: ONLY DO IF LOGGED IN
     }
   }
 }

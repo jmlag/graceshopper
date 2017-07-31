@@ -21,6 +21,7 @@ router.get('/', (req, res, next) => {
     },
   })
   .then(cartItems => res.json(cartItems))
+  .catch(next)
 })
 
 //req.body should be a package.
