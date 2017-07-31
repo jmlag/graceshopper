@@ -17,7 +17,9 @@ function Nav (props) {
           <NavItem to="/cart">Cart</NavItem>
         )
       }
-
+      {
+        props.loggedIn && <NavItem to="/profile">Profile</NavItem>
+      }
       {
         !props.loggedIn ? (
           <NavItem to="/login">Login</NavItem>
