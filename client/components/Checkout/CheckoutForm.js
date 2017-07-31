@@ -52,6 +52,10 @@ class CheckoutForm extends React.Component {
       placeholder: "Enter your address",
     }
 
+    const styles = {      
+      autocompleteItemActive: { backgroundColor: 'cyan' }
+    }
+
     return (
       <form >        
         <Row>
@@ -59,23 +63,26 @@ class CheckoutForm extends React.Component {
           <Input s={3} label="Last Name" />
           <Input s={3} type="email" label="Email"  />
           <Input s={3} label="Phone #"  />
+        </Row>
+        <Row>    
           <PlacesAutocomplete
             inputProps={inputProps}
             onSelect={this.handleSelect} 
             highlightFirstSuggestion={true}
+            styles={styles}
           />
-          {
-            this.state.selected ? (<div>
-              <Input s={1} label="Street #" value={this.state.street_number}/>
-              <Input s={11} label="Address" value={this.state.route} />
-              <Input s={12} label="Address 2" />
-              <Input s={4} label="City" value={this.state.locality} />
-              <Input s={3} label="State/Province" value={this.state.administrative_area_level_1} />
-              <Input s={3} label="Country" value={this.state.country} />
-              <Input s={2} label="Zip/Postal Code" value={this.state.postal_code} />
-            </div>) : ""
-          }
         </Row>
+        {
+          this.state.selected ? (<Row>
+            <Input s={1} label="Street #" value={this.state.street_number}/>
+            <Input s={11} label="Address" value={this.state.route} />
+            <Input s={12} label="Address 2" />
+            <Input s={4} label="City" value={this.state.locality} />
+            <Input s={3} label="State/Province" value={this.state.administrative_area_level_1} />
+            <Input s={3} label="Country" value={this.state.country} />
+            <Input s={2} label="Zip/Postal Code" value={this.state.postal_code} />
+            </Row>) : ""
+        }        
       </form>
     )
   }
