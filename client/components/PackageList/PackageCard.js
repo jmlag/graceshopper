@@ -2,11 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { putCart, updateTempCart } from '../../store'
+import Searchbar from './Searchbar'
 
 function PackageCard(props){
   const pkg = props.pkg
   return (
     <div className="col s12 m6">
+      <Searchbar />
       <div className="card">
         <NavLink to={`/packages/${pkg.id}`}>
           <div className="card-image">
