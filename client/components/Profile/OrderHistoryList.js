@@ -15,13 +15,7 @@ class OrderHistoryList extends Component {
       <ul className="collection">
         {
           orderHistory.map(order => (
-            <li className="collection-item avatar">
-              <img src="" className="circle" />
-              <span className="title"></span>
-              <p>
-
-              </p>
-            </li>
+            <OrderHistory order={order} />
           ))
         }
       </ul>

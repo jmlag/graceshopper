@@ -1,5 +1,5 @@
 export default props => (
-  <div>
-    Single Order
-  </div>
+  <li className="collection-item avatar">
+    adsf
+  </li>
 )
