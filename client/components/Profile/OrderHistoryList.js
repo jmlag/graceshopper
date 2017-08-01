@@ -12,7 +12,10 @@ export default function OrderHistoryList(props) {
         orders.packages.map(order => <OrderHistory key={order.id} order={order} />)
       }
       <li className="collection-item">
-        ${orders.packages.reduce(((sum, order) => sum + order.price),0)}
+        <h6 className=" primaryColor-text">
+          ${orders.packages.reduce(((sum, order) => sum + order.price),0)}
+        </h6>
+        
       </li>
     </ul>
   )
