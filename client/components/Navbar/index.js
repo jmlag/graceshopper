@@ -18,7 +18,7 @@ function Nav (props) {
         )
       }
       {
-        props.loggedIn && !!cartSize && <NavItem to="/checkout">Checkout</NavItem>
+        !!cartSize && <NavItem to="/checkout">Checkout</NavItem>
       }
       {
         props.loggedIn && <NavItem to="/profile">Profile</NavItem>
