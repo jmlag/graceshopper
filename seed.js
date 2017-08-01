@@ -20,18 +20,42 @@ const users = [
 ];
 
 const packages = [
-  { name: "Internet 10",
-    imageUrl: "http://www.drodd.com/images15/1-7.jpg",
-    price: 13.99,
-    description: "Browse, stay connected to the world, or keep in touch with family or friends." },
-  { name: "Internet 11",
-    imageUrl: "http://www.drodd.com/images15/2-23.jpg",
-    price: 111.99,
-    description: "Our Internet goes to 11." },
-  { name: "Internet 1000",
-    imageUrl: "http://www.drodd.com/images15/3-12.jpg",
-    price: 500.99,
-    description: "*not actually 1Gbps." }
+  { name: "News Add-on",
+    imageUrl: "/images/products/news.png",
+    price: 9.99,
+    description: "Catch on what's happening around the globe! This add-on contains Unrestricted speed access to top news websites! All at half the data-cost!. " },
+  { name: "Social Add-on",
+    imageUrl: "/images/products/social.png",
+    price: 4.99,
+    description: "Catch on your friends and family! You can stay updated on the the most current memes and gossip! This add-on contains Unrestricted speed access to top social websites! All at half the data-cost!." },
+  { name: "Cinema Add-on",
+    imageUrl: "/images/products/cinema.png",
+    price: 14.99,
+    description: "Watch your favorite movies and shows with these popular websites! This add-on contains Unrestricted speed access to top cinema websites! All at half the data-cost!." },
+    { name: "Video Add-on",
+    imageUrl: "/images/products/videostreaming.png",
+    price: 4.99,
+    description: "With this add-on you can watch all the cat videos your heart desires(with extra 10Gb add-ons :).This add-on contains Unrestricted speed access to top video streaming websites! All at half the data-cost!." },
+    { name: "Market Add-on",
+    imageUrl: "/images/products/market.png",
+    price: 4.99,
+    description: "Shop! Shop! Shop! Buy anything you need with this add-on. This add-on contains Unrestricted speed access to top market websites! All at half the data-cost!." },
+    { name: "Music Add-on",
+    imageUrl: "/images/products/music.png",
+    price: 4.99,
+    description: "Listen to the todays top tunes with your streaming service of choice! This add-on contains Unrestricted speed access to top music websites! All at half the data-cost!." },
+    { name: "Research Add-on",
+    imageUrl: "/images/products/research.png",
+    price: 4.99,
+    description: "Write a paper, learn something new or just casually browse and learn random facts This add-on contains Unrestricted speed access to info news websites! All at half the data-cost!." },
+    { name: "Search Add-on",
+    imageUrl: "/images/products/search.png",
+    price: 4.99,
+    description: "All your searching needs with this package! This add-on contains Unrestricted speed access to top search engine websites! All at half the data-cost!." },
+    { name: "10 Gb",
+    imageUrl: "/images/products/10gb.png",
+    price: 9.99,
+    description: "Add 10Gbs of highspeed internet instantaneously!" },
 ];
 
 const reviews = [
@@ -54,36 +78,36 @@ const seed = () => (
   .then(() =>
   Promise.all(packages.map(pkg =>
     Package.create(pkg))
-  ))
-  .then(() =>
-  Promise.all(reviews.map(review =>
-    Review.create(review))
-  ))
-  .then(() => {
-    return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
-  })
-  .spread( (reviews, usr1, usr3, usr5) => {
-    return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);//associate reviews with user
-  })
-  .then( reviews => {
-    return Promise.all( [...reviews, Package.findAll() ] );
-    // returns [review1, review2, ..., review_n, [pkg1, pkg2, ..., pkg_n] ]
-  })
-  .then( arr => {
-    return Promise.all( arr[3].map( (pkg, i) => arr[i].setPackage(pkg) ))
-    //associate reviews with package
-  } )
-  .then(() => {
-    return Promise.all([Cart.create(), Cart.create(), Cart.create()]);
-  })
-  .then(carts => {
-    return Promise.all([carts, User.findById(2), User.findById(4), User.findById(6) ])
-  })
-  .then( arr => {
-    return Promise.all(arr[0].map((cart,index) => {
-        return cart.setUser(arr[index+1]);
-      }))
-    })
+  )))
+  // .then(() =>
+  // Promise.all(reviews.map(review =>
+  //   Review.create(review))
+  // ))
+  // .then(() => {
+  //   return Promise.all([Review.findAll(), User.findById(1), User.findById(3), User.findById(5)]);
+  // })
+  // .spread( (reviews, usr1, usr3, usr5) => {
+  //   return Promise.all([ reviews[0].setUser(usr1), reviews[1].setUser(usr3), reviews[2].setUser(usr5) ]);//associate reviews with user
+  // })
+  // .then( reviews => {
+  //   return Promise.all( [...reviews, Package.findAll() ] );
+  //   // returns [review1, review2, ..., review_n, [pkg1, pkg2, ..., pkg_n] ]
+  // })
+  // .then( arr => {
+  //   return Promise.all( arr[3].map( (pkg, i) => arr[i].setPackage(pkg) ))
+  //   //associate reviews with package
+  // } )
+  // .then(() => {
+  //   return Promise.all([Cart.create(), Cart.create(), Cart.create()]);
+  // })
+  // .then(carts => {
+  //   return Promise.all([carts, User.findById(2), User.findById(4), User.findById(6) ])
+  // })
+  // .then( arr => {
+  //   return Promise.all(arr[0].map((cart,index) => {
+  //       return cart.setUser(arr[index+1]);
+  //     }))
+  //   })
   // .then(e => console.log("=============", e))
   // to seed db with orderHistory, make a post request with an object like this
   /*
@@ -104,8 +128,8 @@ const seed = () => (
       ]
     } 
     */
-  .catch(console.error)
-);
+//   .catch(console.error)
+// );
 
 const main = () => {
   console.log('Syncing db...');

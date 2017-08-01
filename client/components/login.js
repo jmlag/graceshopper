@@ -41,11 +41,12 @@ class LoggingBox extends React.Component {
   render() {
 
     const {error} = this.props;
-   
+
     return (
+      <div>
       <div className="form">
         <div
-          className={"form-toggle " + (this.state.toggle ? "" : "visible")}
+          className={"tertiaryColor-text form-toggle " + (this.state.toggle ? "" : "visible")}
           onClick={e => this.toggleBtn(e)}
         />
 
@@ -144,13 +145,18 @@ class LoggingBox extends React.Component {
           </div>
         </div>
       </div>
+      <div className={"register center " + (this.state.toggle && "visible")}>
+        <div className="right-align tertiaryColor-text">
+          REGISTER&nbsp;&nbsp;<i className="material-icons">call_made</i>&nbsp;&nbsp;
+        </div>
+      </div>
+      </div>
     );
   }
 }
 
 
 const mapLogin = (state) => {
-  console.log(state.user)
   return {
     error: state.user.error
   }
