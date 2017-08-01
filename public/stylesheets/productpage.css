@@ -72,7 +72,12 @@
   
   font-weight: 5vh;
 }
-.thumbnail {
-  width: 50%;
-  height: auto
+
+.rating {
+  cursor: pointer;
+}
+
+.price-text {
+  font-size: 4vh;
+  font-weight: 300;
 }

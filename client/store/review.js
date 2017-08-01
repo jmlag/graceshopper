@@ -41,7 +41,6 @@ export const destroyReview = function(review) {
 };
 
 export const getReviews = function(packageId) {
-  console.log('this ran')
   return function thunk(dispatch) {
     axios
       .get(`/api/packages/${packageId}/reviews`)

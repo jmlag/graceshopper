@@ -22,6 +22,7 @@ class Reviews extends React.Component {
         content: content,
         packageId:this.props.packageId
       })
+      e.target.comment.value = "Enter your review here..."
   }
 
   starHandler(e){
@@ -45,18 +46,19 @@ class Reviews extends React.Component {
                 name="comment"
                 placeholder="Enter your review here..."
                 rows="5"
+                required="required"
               />
 
               <div className="text-right inline">
-                <button className="btn" type="submit">
+                <button className="btn tertiaryColor" type="submit">
                   Submit
                 </button>
-                <span className="right" >
-                    <i value={1} className="material-icons" onClick={(e) => this.starHandler(e)} >{(this.state.starToggle < 1) ? "star_border" : "star"}</i>
-                    <i value={2} className="material-icons" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 2) ? "star_border" : "star"}</i>
-                    <i value={3} className="material-icons" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 3) ? "star_border" : "star"}</i>
-                    <i value={4} className="material-icons" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 4) ? "star_border" : "star"}</i>
-                    <i value={5} className="material-icons" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 5) ? "star_border" : "star"}</i>
+                <span className="right rating" >
+                    <i value={1} className="material-icons mainColor-text" onClick={(e) => this.starHandler(e)} >{(this.state.starToggle < 1) ? "star_border" : "star"}</i>
+                    <i value={2} className="material-icons mainColor-text" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 2) ? "star_border" : "star"}</i>
+                    <i value={3} className="material-icons mainColor-text" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 3) ? "star_border" : "star"}</i>
+                    <i value={4} className="material-icons mainColor-text" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 4) ? "star_border" : "star"}</i>
+                    <i value={5} className="material-icons mainColor-text" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 5) ? "star_border" : "star"}</i>
                 </span>
 
               </div>
