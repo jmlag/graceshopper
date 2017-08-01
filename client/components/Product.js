@@ -1,16 +1,15 @@
-import React from "react";
-import ReviewBox from "./ReviewBox";
-import Review from "./Reviewlist";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
-import { connect } from "react-redux";
-import { getReviews } from "../store";
+import React from 'react';
+import ReviewBox from './ReviewBox';
+import Review from './Reviewlist';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { getReviews, putCart, updateTempCart } from '../store';
 
 class Product extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
-  
+
   componentDidMount(){
     this.props.getReviews(this.props.productId)
   }
@@ -49,16 +48,18 @@ class Product extends React.Component {
                     Premium
                   </button>
                 </div>
-        
+
               </div>
             </div>
 
             <div className="price-text">
-            Price: 
+            Price:
               <span className="price-text mainColor-text ">
                  ${pkg.price}
               </span>
-              <button className="waves-effect waves-light tertiaryColor btn right">
+              <button
+              onClick={() => this.props.addToCart(pkg)}
+              className="waves-effect waves-light tertiaryColor btn right">
                 Add to Cart
               </button>
             </div>
@@ -78,6 +79,18 @@ const mapToState = (store, oldProps) => {
     productId: +oldProps.match.params.productId
   };
 };
-const mapToDispatch = {getReviews};
+
+const mapToDispatch = (dispatch, oldProps) => {
+  return {
+    getReviews,
+    addToCart(pkg){
+      if(oldProps.isLoggedIn){
+        dispatch(putCart(pkg))
+      } else {
+        dispatch(updateTempCart(pkg))
+      }
+    }
+  }
+}
 
 export default withRouter(connect(mapToState, mapToDispatch)(Product));
