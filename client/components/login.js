@@ -15,7 +15,7 @@ class LoggingBox extends React.Component {
     this.registerHandler = this.registerHandler.bind(this)
   }
 
-  panelClickHandle(e) {
+  panelClickHandle(e) { //handler?
     e.preventDefault();
       this.setState({ toggle: false });
   }
@@ -57,6 +57,7 @@ class LoggingBox extends React.Component {
           </div>
           <div className="form-content">
             <form onSubmit={(e) => this.loginHandler(e)}>
+              {/* ^ this is equivalent to passing in this.loginHandler alone */}
               <div className="form-group">
                 <label htmlFor="Email">Email</label>
                 <input
@@ -93,7 +94,8 @@ class LoggingBox extends React.Component {
         </div>
 
         <div
-          onClick={(this.state.toggle ? (e) => this.panelClickHandle(e): '')}
+          onClick={(this.state.toggle ? (e) => this.panelClickHandle(e) : '')}
+          // ^ again, && for no-else-case, and passing this.panelClickHander alone is equivalent
           className={
             "form-panel two " + (this.state.toggle ? "hidden" : "active")
           }
@@ -102,7 +104,7 @@ class LoggingBox extends React.Component {
             <h1>Register Account</h1>
           </div>
           <div className="form-content">
-            <form onSubmit={(e) => this.registerHandler(e)}>
+            <form onSubmit={(e) => this.registerHandler(e)}> {/* thing */}
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <input

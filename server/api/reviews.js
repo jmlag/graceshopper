@@ -19,6 +19,8 @@ router.post('/', (req, res, next) => {
   .catch(next)
 });
 
+// this is confusing, that GET /reviews/1 would not be review of ID one, but review for product 1
+// I think this is a relic of old code? perhaps remove
 router.get('/:productId', (req, res, next) => {
   Review.findAll({ where: { productId: req.params.productId } })
     .then(reviews => res.json(reviews))

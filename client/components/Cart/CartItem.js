@@ -16,6 +16,9 @@ class CartItem extends Component{
   handleChange(e){
     console.log('handleChange')
     e.preventDefault()
+    // if next state depends on previous state, it's best to use a callback
+    // since setState is asynchronous. this switch is pretty small and may not 
+    // cause even cause much issue, but better safe than sorry!
     this.setState({showEdit: !this.state.showEdit})
   }
 
@@ -48,11 +51,12 @@ class CartItem extends Component{
   }
 }
 
-function mapStateToProps(state, oldProps){
+function mapStateToProps(state, oldProps){ // not so much that they are 'old' props, but 'own' props?
+  // also, you do not need to 'forward' these ownProps, they will be passed down anyway...
   return {
-    pkg: oldProps.pkg,
+    pkg: oldProps.pkg, // ... so this,
     cart: state.cart,
-    isLoggedIn: oldProps.isLoggedIn,
+    isLoggedIn: oldProps.isLoggedIn, // ... and this
   }
 }
 

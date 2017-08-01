@@ -18,8 +18,8 @@ function PackageCard(props){
         </div>
         <div className="card-action">
           <button
-          className="btn tertiaryColor"
-          onClick={() => props.addToCart(pkg)}
+            className="btn tertiaryColor"
+            onClick={() => props.addToCart(pkg)}
           >
             Add to Cart
           </button>
@@ -28,15 +28,16 @@ function PackageCard(props){
     </div>
   )
 }
-function mapStateToProps(state, oldProps) {
+function mapStateToProps(state, oldProps) { //ownProps
   return {
     pkg: oldProps.pkg,
   }
 }
 
-function mapDispatchToProps(dispatch, oldProps) {
+function mapDispatchToProps(dispatch, oldProps) { //ownProps
   return {
-    addToCart(pkg){
+    addToCart(pkg){ // once again, repetitive logic across files when mapping props
+      // consider refactoring into a thunk or similar
       if(oldProps.isLoggedIn){
         dispatch(putCart(pkg))
       } else {

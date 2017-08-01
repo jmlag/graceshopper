@@ -30,7 +30,7 @@ function Review(props) {
 }
 
 
-const mapToState = (state) => ({ review: state.review })
+const mapToState = (state) => ({ review: state.review }) // review or reviews?
 
 
 export default connect(mapToState)(Review)

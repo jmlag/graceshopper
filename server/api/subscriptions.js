@@ -1,3 +1,5 @@
+// subscription === historyItem? naming is a bit confusing, probably should have just picked one
+
 const router = require('express').Router();
 const { HistoryItem } = require('../db/models');
 

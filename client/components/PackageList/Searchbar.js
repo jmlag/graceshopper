@@ -1,4 +1,4 @@
-import Autosuggest from 'react-autosuggest'
+import Autosuggest from 'react-autosuggest' // this package should be saved in dependencies
 import React from 'react'
 import PackageCard from './PackageCard'
 
@@ -11,7 +11,7 @@ const getSuggestions = (value, array) => {
   ).map(pkg => pkg.name);
 };
 
-const getSuggestionValue = suggestion => suggestion;
+const getSuggestionValue = suggestion => suggestion; //?
 
 const renderSuggestion = suggestion => (
   <div>
@@ -21,9 +21,10 @@ const renderSuggestion = suggestion => (
 
 export default class Searchbar extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);
     
-    this.packages = Object.values(props.packages)
+    this.packages = Object.values(props.packages) // what is this for?
+    // also, pretty this only runs once and does not update if props update
 
     this.state = {
       value: '',

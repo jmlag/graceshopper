@@ -21,13 +21,13 @@ function EditCart(props){
   )
 }
 
-function mapStateToProps(state, oldProps) {
+function mapStateToProps(state, oldProps) { //ownP{rops}
   return {
     quantity: oldProps.quantity,
   }
 }
 
-function mapDispatchToProps(dispatch, oldProps) {
+function mapDispatchToProps(dispatch, oldProps) { //ownProps
   return {
     editCartQuantity(evt){
       evt.preventDefault()

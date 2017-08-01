@@ -61,7 +61,7 @@ function CheckoutForm(props){
   )
 }
 
-function mapStoreToProps(store){
+function mapStoreToProps(store){ //state - terminology is important
   return {
     user: store.user,
   }

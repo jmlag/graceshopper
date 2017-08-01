@@ -9,7 +9,7 @@ import { getReviews } from "../store";
 class Product extends React.Component {
   constructor() {
     super();
-  }
+  } // no need for empty constructor
   
   componentDidMount(){
     this.props.getReviews(this.props.productId)
@@ -17,6 +17,7 @@ class Product extends React.Component {
 
   render() {
     let pkg = this.props.pkg[this.props.productId] || { name: "hi", description: "" };
+    // ^ why not just determine this in mapState? we don't care about all pkgs, just the 1 pkg
     return (
       <div className="container">
         <div className="row">

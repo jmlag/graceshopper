@@ -10,6 +10,7 @@ function PackageList (props) {
         <h1 className = "header center mainColor-text">Packages</h1>
         <div className="row">
           {Object.keys(props.packages).length ? (<Searchbar packages={props.packages} isLoggedIn={props.isLoggedIn}/>) : ''}
+          {/* using && is a great option if there is no else case */}
         </div>
       </div>
     </div>

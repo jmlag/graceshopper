@@ -7,6 +7,7 @@ const UPDATE_TEMP_CART_QUANTITY = 'UPDATE_TEMP_CART_QUANTITY'
 const DELETE_CART = 'DELETE_CART'
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 
+
 const readCart = cart => ({type: READ_CART, cart})
 const updateCart = cartItem => ({type: UPDATE_CART, cartItem})
 export const updateTempCart = pkg => ({type: UPDATE_TEMP_CART, pkg})
@@ -66,13 +67,14 @@ export default function cartReducer(state = [], action){
     case UPDATE_TEMP_CART: {
       let oldCartItem = state.find((cartItem) => (+cartItem.packageId === +action.pkg.id))
       let out = {}
-      if (!oldCartItem){
+      if (!oldCartItem){ // perhaps UPDATE_CART and ADD_ITEM should be separate cases?
         out.packageId = action.pkg.id
         out.quantity = 1
         return [...state, out]
       } else {
         out = Object.assign({}, oldCartItem)
-        out.quantity++
+        out.quantity++ // why do we increase quantity by default?
+        // how is this different from what UPDATE_TEMP_CART_QUANTITY does?
         return [...state.filter(item => item.packageId !== action.pkg.id), out]
       }
     }

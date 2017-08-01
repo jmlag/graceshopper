@@ -19,6 +19,8 @@ function Nav (props) {
       }
       {
         props.loggedIn && !!cartSize && <NavItem to="/checkout">Checkout</NavItem>
+        // personal opinion on UX - don't think we need a separate option for checkout
+        // on the navbar. it seems to make much more sense to go cart --> checkout
       }
       {
         props.loggedIn && <NavItem to="/profile">Profile</NavItem>

@@ -28,7 +28,7 @@ function CartList(props) {
               }
             </ul>
           </div>)
-        }
+        } {/* what's going on here? why are lines 11-19 vs. 22-31 separate? */}
       </div>
       <div className="row">
         <div className = "col s6 m3 offset-m6">

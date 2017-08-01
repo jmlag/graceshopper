@@ -1,3 +1,5 @@
+// (e) => somehandlerfunc(e) is equivalen to just passing in somehandlerfunc
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -52,6 +54,8 @@ class Reviews extends React.Component {
                   Submit
                 </button>
                 <span className="right" >
+                  {/* these stars seem awfully repetitve and reuseable... COMPONENT?
+                    e.g. <ReviewStar value={valueNum} starHandler={starHandler} /> */}
                     <i value={1} className="material-icons" onClick={(e) => this.starHandler(e)} >{(this.state.starToggle < 1) ? "star_border" : "star"}</i>
                     <i value={2} className="material-icons" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 2) ? "star_border" : "star"}</i>
                     <i value={3} className="material-icons" onClick={e => this.starHandler(e)}>{(this.state.starToggle < 3) ? "star_border" : "star"}</i>

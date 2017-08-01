@@ -42,6 +42,8 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id,
     cart: state.cart,
     cartSize: state.cart.reduce((sum, cartItem) => sum + +cartItem.quantity, 0)
+    // why not just make a 'cartNotEmpty' prop instead of the !!cartSize,
+    // it is clearer and more direct when in use in the component itself
   }
 }
 

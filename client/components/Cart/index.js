@@ -1,3 +1,6 @@
+// general comment about guest carts - they would not persist across sessions
+// the way that it's handled right now, correct?
+
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -26,6 +29,11 @@ function Cart(props){
 function mapStateToProps(state){
   return {
     cart: state.cart.map(cartItem => {
+      // i've seen this exact function used in another mapState function.
+      // can it be more dry? abstract it into a utility file?
+      // better yet, perhaps a thunk? (remember, thunks don't have to be reserved
+      // making server requests! It can be for any sub-routine of actions)
+      // why do we need to do these operations anyway?
       let out = state.packages[cartItem.packageId]
       out.quantity = cartItem.quantity
       out.edit = false
