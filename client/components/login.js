@@ -145,7 +145,7 @@ class LoggingBox extends React.Component {
           </div>
         </div>
       </div>
-      <div className="register center">
+      <div className={"register center " + (this.state.toggle && "visible")}>
         <div className="right-align tertiaryColor-text">
           REGISTER&nbsp;&nbsp;<i className="material-icons">call_made</i>&nbsp;&nbsp;
         </div>
