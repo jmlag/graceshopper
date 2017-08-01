@@ -1,90 +1,92 @@
 import React from 'react'
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
-import { Row, Input } from 'react-materialize'
+import { connect } from 'react-redux'
 
-const componentForm = {
-  street_number: 'short_name',
-  route: 'long_name',
-  locality: 'long_name',
-  administrative_area_level_1: 'short_name',
-  country: 'long_name',
-  postal_code: 'short_name'
-};
+function CheckoutForm(props){
+  return (
+    <form onSubmit={props.sendCheckout}>
+      <div className="row">
+        <div className="input-field col s12 m6">
+          <input id="firstName" type="text" className="validate" />
+          <label>First Name</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="lastName" type="text" className="validate" />
+          <label>Last Name</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input defaultValue={props.user.email} id="email" type="email" className="validate" />
+          <label className="active">Email</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="phone" type="tel" className="validate" />
+          <label>Phone #</label>
+        </div>
+      </div>
+      <div className="row">
+        <div className="input-field col s4 m2">
+          <input id="street" type="number" className="validate" />
+          <label>Street #</label>
+        </div>
+        <div className="input-field col s8 m4">
+          <input id="address" type="text" className="validate" />
+          <label>Address</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="address2" type="text" className="validate" />
+          <label>Address 2</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="city" type="text" className="validate" />
+          <label>City</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="state" type="text" className="validate" />
+          <label>State/Providence</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="country" type="text" className="validate" />
+          <label>Country</label>
+        </div>
+        <div className="input-field col s12 m6">
+          <input id="zip" type="number" className="validate" />
+          <label>Zip Code</label>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col s12 right-align">
+          <button type="submit" className="btn mainColor">Submit<i className="material-icons right">send</i></button>
+        </div>
+      </div>
+    </form>
+  )
+}
 
-class CheckoutForm extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      address: '',
-      selected: false,
-      street_number: '',
-      route: '',
-      locality: '',
-      administrative_area_level_1: '',
-      country: '',
-      postal_code:'',
-     }
-    this.onChange = (address) => {  this.setState({ address }); }
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSelect = (event) => {
-    Promise.resolve(this.onChange(event))
-    .then(this.setState({selected: true}))
-    .then(() => geocodeByAddress(this.state.address))
-    .then(result => result[0].address_components)
-    .then(addressComponents => addressComponents.forEach(component => {
-      const componentType = component.types[0];
-      if (componentForm[componentType]) {
-        const newState = Object.assign({}, this.state)
-        newState[componentType] = component[componentForm[componentType]];
-        this.setState(newState);
-      }
-    }))
-    .catch(console.error);
-  }
-
-  render() {
-    const inputProps = {
-      value: this.state.address,
-      onChange: this.onChange,
-      placeholder: "Enter your address",
-    }
-
-    const styles = {
-      autocompleteItemActive: { backgroundColor: 'cyan' }
-    }
-
-    return (
-      <form>
-        <Row>
-          <Input s={3} label="First Name" />
-          <Input s={3} label="Last Name" />
-          <Input s={3} type="email" label="Email"  />
-          <Input s={3} label="Phone #" />
-        </Row>
-        <Row>
-          <PlacesAutocomplete
-            inputProps={inputProps}
-            onSelect={this.handleSelect}
-            highlightFirstSuggestion={true}
-            styles={styles}
-          />
-        </Row>
-        {
-          this.state.selected ? (<Row>
-            <Input s={1} label="Street #" value={this.state.street_number}/>
-            <Input s={11} label="Address" value={this.state.route} />
-            <Input s={12} label="Address 2" />
-            <Input s={4} label="City" value={this.state.locality} />
-            <Input s={3} label="State/Province" value={this.state.administrative_area_level_1} />
-            <Input s={3} label="Country" value={this.state.country} />
-            <Input s={2} label="Zip/Postal Code" value={this.state.postal_code} />
-            </Row>) : ""
-        }
-      </form>
-    )
+function mapStoreToProps(store){
+  return {
+    user: store.user,
   }
 }
 
-export default CheckoutForm;
+function mapDispatchToProps(dispatch){
+  return {
+    sendCheckout(evt){
+      evt.preventDefault()
+      const order = {
+        firstName: evt.target.firstName.value,
+        lastName: evt.target.lastName.value,
+        email: evt.target.email.value,
+        phone: evt.target.phone.value,
+        street: evt.target.street.value,
+        address: evt.target.address.value,
+        address2: evt.target.address2.value,
+        city: evt.target.city.value,
+        state: evt.target.state.value,
+        country: evt.target.country.value,
+        zip: evt.target.zip.value,
+      }
+    }
+  }
+}
+
+
+export default connect(mapStoreToProps, mapDispatchToProps)(CheckoutForm);

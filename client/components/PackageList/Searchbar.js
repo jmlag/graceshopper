@@ -11,7 +11,7 @@ const getSuggestions = (value, array) => {
   ).map(pkg => pkg.name);
 };
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion;
 
 const renderSuggestion = suggestion => (
   <div>
@@ -30,6 +30,12 @@ export default class Searchbar extends React.Component {
       suggestions: this.packages.map(pkg => pkg.name),
     };
   }
+
+  onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+    this.setState({
+      value: suggestion
+    })
+  };
 
   onChange = (event, { newValue }) => {
     this.setState({
@@ -57,7 +63,8 @@ export default class Searchbar extends React.Component {
     const inputProps = {
       placeholder: 'Search for a package',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      onBlur: this.onChange
     };
 
     return (<div>
@@ -65,6 +72,7 @@ export default class Searchbar extends React.Component {
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected={this.onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
@@ -72,7 +80,7 @@ export default class Searchbar extends React.Component {
       {
         Object.values(this.props.packages)
          .filter(pkg => {
-          return !this.state.value || this.state.suggestions.includes(pkg.name);
+          return !this.state.value || this.state.suggestions.includes(pkg.name) || this.state.value === pkg.name;
         }) 
         .map(pkg => (
               <PackageCard isLoggedIn={this.props.isLoggedIn} key={pkg.id} pkg={pkg} />

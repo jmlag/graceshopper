@@ -18,6 +18,9 @@ function Nav (props) {
         )
       }
       {
+        !!cartSize && <NavItem to="/checkout">Checkout</NavItem>
+      }
+      {
         props.loggedIn && <NavItem to="/profile">Profile</NavItem>
       }
       {

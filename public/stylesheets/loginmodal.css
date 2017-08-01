@@ -23,7 +23,7 @@ html {
   border-radius: 4px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  margin: 100px auto 10px;
+  margin: 100px auto -3px;
   overflow: hidden;
 }
 .form-toggle {
@@ -48,8 +48,6 @@ html {
   content: '';
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
   width: 30px;
   height: 4px;
   -webkit-transform: translate(-50%, -50%);
@@ -60,8 +58,10 @@ html {
           transform: translate(-50%, -50%) rotate(45deg);
 }
 .form-toggle:after {
-  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
-          transform: translate(-50%, -50%) rotate(-45deg);
+  content: 'X';
+  font-size: 52px;
+  left: 29px;
+  top: -4px;
 }
 .form-toggle.visible {
   -webkit-transform: translate(0, -25%) scale(1);
@@ -262,4 +262,16 @@ html {
 .login-img{
   width:40%;
   height: auto;
+}
+
+.register{
+  font-weight: 500;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display:none;
+}
+
+.visible{
+  display: block;
 }

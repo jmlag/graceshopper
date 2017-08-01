@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Router} from 'react-router';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
 import {Login, Signup, PackageList, Product, Cart, LandingPage, Navbar, Checkout, Profile} from './components';
@@ -14,8 +14,7 @@ class Routes extends Component {
   }
 
   render () {
-
-    const {isLoggedIn} = this.props
+    const { isLoggedIn, cartSize } = this.props
 
     return (
       <Router history={history}>
@@ -23,13 +22,15 @@ class Routes extends Component {
 
           <Route path = "/" render = {() => <Navbar loggedIn = {isLoggedIn} />} />
           <Switch>
-            {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/packages" component={PackageList} />
-            <Route exact path="/packages/:productId" component={Product} />
+            <Route exact path="/packages/:productId"
+            component={Product}
+            isLoggedIn={isLoggedIn}
+            />
+            {!!cartSize && <Route exact path="/checkout" component={Checkout} />}
             {isLoggedIn && <Route exact path="/profile" component={Profile} />}
             <Route component={LandingPage} />
           </Switch>
@@ -41,7 +42,9 @@ class Routes extends Component {
 
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cart: state.cart,
+    cartSize: state.cart.reduce((sum, cartItem) => sum + +cartItem.quantity, 0)
   }
 }
 
@@ -50,7 +53,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(getPackages())
-    }
+    },
   }
 }
 
