@@ -12,8 +12,5 @@ export { default as Navbar } from './Navbar'
 export { default as Product } from './Product'
 export { default as Checkout } from './Checkout'
 export {default as Login} from './login'
-<<<<<<< HEAD
 export { default as Profile} from './Profile'
-=======
 export {default as Reviewlist} from './Reviewlist'
->>>>>>> master

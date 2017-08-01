@@ -20,8 +20,8 @@ class Product extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col s6">
-            <img className="thumbnail" data-image="black" src={pkg.imageUrl} alt="" />
+          <div className="thumbnail col s6">
+            <img className="responsive-img" data-image="black" src={pkg.imageUrl} alt="" />
           </div>
 
           <div className="col s6">
@@ -49,15 +49,16 @@ class Product extends React.Component {
                     Premium
                   </button>
                 </div>
-                <a href="#">What Plan is best for you?</a>
+        
               </div>
             </div>
 
-            <div className="product-price">
-              <span>
-                {pkg.price}
+            <div className="price-text">
+            Price: 
+              <span className="price-text mainColor-text ">
+                 ${pkg.price}
               </span>
-              <button className="waves-effect waves-light btn">
+              <button className="waves-effect waves-light tertiaryColor btn right">
                 Add to Cart
               </button>
             </div>
