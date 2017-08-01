@@ -25,7 +25,6 @@ class Product extends React.Component {
 
           <div className="col s6">
             <div className="product-description">
-              <span>Product Category Placeholder</span>
               <h1>
                 {pkg.name}
               </h1>
