@@ -6,7 +6,7 @@ import { putCart, updateTempCart } from '../../store'
 function PackageCard(props){
   const pkg = props.pkg
   return (
-    <div className="col s12 m6">
+    <div className="col s12 m6 l4">
       <div className="card">
         <NavLink to={`/packages/${pkg.id}`}>
           <div className="card-image">
