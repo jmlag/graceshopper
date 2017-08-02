@@ -3,11 +3,16 @@ import React from 'react'
 import PackageCard from './PackageCard'
 
 const getSuggestions = (value, array) => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+  let inputLength = 0;
+  let inputValue;
+  if (value !== undefined) {
+    inputValue = value.trim().toLowerCase();
+    inputLength = inputValue.length;
+  } 
 
-  return inputLength === 0 ? [] : array.filter(pkg =>
-    pkg.name.toLowerCase().slice(0, inputLength) === inputValue
+  return inputLength === 0 ? [] : array.filter(pkg => {
+    return pkg.name.toLowerCase().includes(inputValue)
+  }
   ).map(pkg => pkg.name);
 };
 
